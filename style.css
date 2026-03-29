@@ -1,0 +1,643 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ========== ФИКСЫ СКРОЛЛА ========== */
+html {
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+body {
+    overflow-x: hidden;
+    overflow-y: visible;
+}
+
+/* Убираем двойной скролл-бар — только один */
+::-webkit-scrollbar {
+    width: 7px;
+}
+
+::-webkit-scrollbar-track {
+    background: #000000;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #00010c;
+    border-radius: 7px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #c00000;
+}
+
+/* ========== ОСНОВНЫЕ СТИЛИ ========== */
+body {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    min-height: 100vh;
+    color: #fff;
+    width: 100%;
+    position: relative;
+    filter: grayscale(85%) contrast(135%) brightness(92%);
+    transition: filter 0.5s ease;
+    line-height: 1.6;
+}
+
+h1, h2, h3, .glitch, .year, .counter-value {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+}
+
+.epigraph {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+}
+
+/* ========== АНИМИРОВАННЫЙ ФОН ========== */
+.animated-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    background: linear-gradient(125deg, #1a1a2e 0%, #16213e 25%, #0f3460 50%, #1a1a2e 75%, #0f0f1f 100%);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.animated-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 20% 40%, rgba(255, 100, 100, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(100, 100, 255, 0.08) 0%, transparent 50%);
+    animation: pulse 8s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+.animated-bg::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(2px 2px at 20px 30px, rgba(255,255,255,0.15), rgba(0,0,0,0)),
+                      radial-gradient(1px 1px at 70px 150px, rgba(255,255,255,0.1), rgba(0,0,0,0));
+    background-size: 200px 200px, 100px 100px;
+    background-repeat: repeat;
+    animation: floatParticles 60s linear infinite;
+}
+
+@keyframes floatParticles {
+    from { background-position: 0 0, 0 0; }
+    to { background-position: 200px 200px, 100px 100px; }
+}
+
+/* ========== РЕАЛИСТИЧНЫЙ ДОЖДЬ ========== */
+.rain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.drop {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.7);
+    width: 2px;
+    height: 15px;
+    border-radius: 0 0 2px 2px;
+    animation: fall linear infinite;
+    opacity: 0.6;
+    filter: blur(0.5px);
+}
+
+.drop.small {
+    width: 1px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.5);
+    filter: blur(0.2px);
+}
+
+.drop.medium {
+    width: 2px;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.7);
+}
+
+.drop.large {
+    width: 3px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    filter: blur(1px);
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-20vh) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.6;
+    }
+    90% {
+        opacity: 0.4;
+    }
+    100% {
+        transform: translateY(100vh) rotate(5deg);
+        opacity: 0;
+    }
+}
+
+/* ========== НУАР-ЭФФЕКТЫ ========== */
+.vignette {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 999;
+    background: radial-gradient(ellipse at center, transparent 45%, rgba(0,0,0,0.7) 100%);
+}
+
+.noise {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 998;
+    opacity: 0.08;
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJmIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjciIG51bU9jdGF2ZXM9IjMiLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWx0ZXI9InVybCgjZikiIG9wYWNpdHk9IjAuNCIvPjwvc3ZnPg==');
+    background-repeat: repeat;
+    animation: grain 0.5s steps(2) infinite;
+}
+
+@keyframes grain {
+    0% { transform: translate(0, 0); }
+    10% { transform: translate(-2%, -1%); }
+    20% { transform: translate(1%, -2%); }
+    30% { transform: translate(-1%, 2%); }
+    40% { transform: translate(2%, 1%); }
+    50% { transform: translate(-1%, -1%); }
+    60% { transform: translate(1%, 2%); }
+    70% { transform: translate(-2%, 1%); }
+    80% { transform: translate(2%, -1%); }
+    90% { transform: translate(-1%, -2%); }
+    100% { transform: translate(0, 0); }
+}
+
+/* ========== ЭФФЕКТ СТАРОЙ КИНОПЛЕНКИ ========== */
+.film-grain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 997;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0,0,0,0.15) 0px,
+        rgba(0,0,0,0.15) 2px,
+        transparent 2px,
+        transparent 4px
+    );
+    opacity: 0.5;
+    animation: filmScratch 0.15s infinite;
+}
+
+@keyframes filmScratch {
+    0% { opacity: 0.4; transform: translateY(0); }
+    50% { opacity: 0.6; transform: translateY(1px); }
+    100% { opacity: 0.4; transform: translateY(0); }
+}
+
+/* ========== КИНОШНЫЕ ОВЕРЛЕИ ========== */
+.cinema-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 999;
+    background: linear-gradient(to bottom, 
+        rgba(0,0,0,0.3) 0%,
+        transparent 10%,
+        transparent 90%,
+        rgba(0,0,0,0.3) 100%);
+}
+
+.dust {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 998;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><path d="M100,200 Q200,150 300,200 T500,180 T700,200 T900,180" stroke="rgba(255,255,255,0.05)" fill="none" stroke-width="1"/><circle cx="150" cy="400" r="3" fill="rgba(255,255,255,0.1)"/><circle cx="450" cy="500" r="5" fill="rgba(255,255,255,0.08)"/><circle cx="750" cy="600" r="4" fill="rgba(255,255,255,0.1)"/><circle cx="900" cy="300" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="700" r="3" fill="rgba(255,255,255,0.08)"/><circle cx="300" cy="800" r="4" fill="rgba(255,255,255,0.1)"/></svg>');
+    background-repeat: repeat;
+    opacity: 0.25;
+    mix-blend-mode: screen;
+}
+
+/* ========== ГЛАВНАЯ СТРАНИЦА ========== */
+.main-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    width: 100%;
+    max-width: 100%;
+}
+
+.hero {
+    text-align: center;
+    margin-bottom: 30px;
+    width: 100%;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.epigraph {
+    margin-bottom: 30px;
+    opacity: 0.8;
+}
+
+.epigraph p {
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+}
+
+.epigraph span {
+    font-size: 0.9rem;
+    display: block;
+    margin-top: 8px;
+    opacity: 0.6;
+}
+
+.glitch {
+    font-size: 5rem;
+    font-weight: 900;
+    position: relative;
+    text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75), -0.05em -0.025em 0 rgba(0, 255, 0, 0.75);
+    animation: glitch 0.3s infinite, textGlow 2s ease-in-out infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes glitch {
+    0% { text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75), -0.05em -0.025em 0 rgba(0, 255, 0, 0.75); }
+    25% { text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75), 0.025em 0.05em 0 rgba(0, 255, 0, 0.75); }
+    50% { text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75), 0.05em 0 0 rgba(0, 255, 0, 0.75); }
+    75% { text-shadow: -0.025em 0 0 rgba(255, 0, 0, 0.75), 0.025em 0.025em 0 rgba(0, 255, 0, 0.75); }
+    100% { text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75), -0.05em -0.025em 0 rgba(0, 255, 0, 0.75); }
+}
+
+@keyframes textGlow {
+    0% { text-shadow: 0 0 5px rgba(200, 100, 50, 0.3); }
+    50% { text-shadow: 0 0 20px rgba(200, 100, 50, 0.8); }
+    100% { text-shadow: 0 0 5px rgba(200, 100, 50, 0.3); }
+}
+
+.subtitle {
+    font-size: 1.8rem;
+    margin-top: 20px;
+    opacity: 0.9;
+    letter-spacing: 2px;
+}
+
+.description {
+    margin-top: 15px;
+    font-size: 1.1rem;
+    opacity: 0.7;
+}
+
+.counter {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 12px 20px;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(8px);
+    border-radius: 50px;
+    display: inline-block;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.counter-label {
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.counter-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #c9a87b;
+}
+
+/* ========== КАРТОЧКИ ========== */
+.cards-container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    padding: 20px;
+    width: 100%;
+}
+
+.year-card {
+    text-decoration: none;
+    position: relative;
+    height: 280px;
+    border-radius: 24px;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+.year-card:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 30px 50px rgba(0, 0, 0, 0.6);
+}
+
+.card-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(30,30,30,0.7) 0%, rgba(20,20,20,0.5) 100%);
+    backdrop-filter: blur(4px);
+    border-radius: 24px;
+    border: 1px solid rgba(255,255,255,0.15);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+}
+
+.year-card:hover .card-content {
+    backdrop-filter: blur(8px);
+    background: linear-gradient(135deg, rgba(40,40,40,0.8) 0%, rgba(25,25,25,0.6) 100%);
+    border-color: rgba(255,255,255,0.3);
+    transform: scale(1.02);
+    filter: grayscale(100%) contrast(130%);
+}
+
+.year {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #e0e0e0;
+    text-shadow: 0 0 15px rgba(0,0,0,0.8);
+    position: relative;
+    z-index: 2;
+}
+
+.event {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #cccccc;
+    text-align: center;
+    padding: 0 15px;
+    position: relative;
+    z-index: 2;
+}
+
+/* ========== КРОВАВО-КРАСНЫЙ НИМБ ДЛЯ 1991 И 1993 ========== */
+.year-card[data-year="1991"],
+.year-card[data-year="1993"] {
+    position: relative;
+}
+
+.year-card[data-year="1991"]::after,
+.year-card[data-year="1993"]::after {
+    content: '';
+    position: absolute;
+    top: -12px;
+    left: -12px;
+    right: -12px;
+    bottom: -12px;
+    background: radial-gradient(circle, rgba(140, 20, 20, 0.6) 0%, rgba(100, 15, 15, 0.4) 40%, transparent 80%);
+    border-radius: 36px;
+    z-index: -1;
+    opacity: 0.7;
+    filter: blur(5px);
+    transition: all 0.3s ease;
+}
+
+.year-card[data-year="1991"] .card-content,
+.year-card[data-year="1993"] .card-content {
+    border: 2px solid rgba(140, 20, 20, 0.7);
+    box-shadow: 0 0 10px rgba(140, 20, 20, 0.5);
+    transition: all 0.3s ease;
+}
+
+.year-card[data-year="1991"]:hover::after,
+.year-card[data-year="1993"]:hover::after {
+    animation: bloodNimbDeep 0.5s ease-in-out infinite;
+    background: radial-gradient(circle, rgba(170, 30, 30, 0.9) 0%, rgba(130, 20, 20, 0.7) 50%, rgba(90, 15, 15, 0.4) 100%);
+}
+
+.year-card[data-year="1991"]:hover .card-content,
+.year-card[data-year="1993"]:hover .card-content {
+    animation: bloodBorderDeep 0.5s ease-in-out infinite;
+    border-width: 3px;
+}
+
+@keyframes bloodNimbDeep {
+    0% {
+        opacity: 0.7;
+        transform: scale(1);
+        filter: blur(5px);
+        background: radial-gradient(circle, rgba(150, 25, 25, 0.8) 0%, rgba(110, 18, 18, 0.5) 50%, rgba(70, 12, 12, 0.3) 100%);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.06);
+        filter: blur(10px);
+        background: radial-gradient(circle, rgba(190, 35, 35, 1) 0%, rgba(150, 25, 25, 0.8) 50%, rgba(110, 18, 18, 0.5) 100%);
+    }
+    100% {
+        opacity: 0.7;
+        transform: scale(1);
+        filter: blur(5px);
+        background: radial-gradient(circle, rgba(150, 25, 25, 0.8) 0%, rgba(110, 18, 18, 0.5) 50%, rgba(70, 12, 12, 0.3) 100%);
+    }
+}
+
+@keyframes bloodBorderDeep {
+    0% {
+        border-color: rgba(150, 25, 25, 0.9);
+        box-shadow: 0 0 15px rgba(150, 25, 25, 0.6), 0 0 25px rgba(110, 18, 18, 0.4);
+    }
+    50% {
+        border-color: rgba(190, 35, 35, 1);
+        box-shadow: 0 0 30px rgba(190, 35, 35, 0.8), 0 0 45px rgba(150, 25, 25, 0.6);
+    }
+    100% {
+        border-color: rgba(150, 25, 25, 0.9);
+        box-shadow: 0 0 15px rgba(150, 25, 25, 0.6), 0 0 25px rgba(110, 18, 18, 0.4);
+    }
+}
+
+/* ========== ПАРАЛАКС-ПЕРЕХОД ========== */
+.parallax-transition {
+    position: relative;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 40px 0 20px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.parallax-transition.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.transition-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    letter-spacing: 4px;
+    color: #c9a87b;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.transition-line {
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #c9a87b, #aa3e3e, #c9a87b, transparent);
+    transition: width 1s ease;
+}
+
+.parallax-transition.visible .transition-line {
+    width: 200px;
+}
+
+/* ========== ПОДВАЛ ========== */
+footer {
+    text-align: center;
+    padding: 40px;
+    margin-top: 60px;
+    color: rgba(255,255,255,0.5);
+    font-size: 0.8rem;
+    width: 100%;
+}
+
+/* ========== АДАПТАЦИЯ ========== */
+@media (max-width: 768px) {
+    .glitch { font-size: 2.5rem; }
+    .subtitle { font-size: 1.2rem; }
+    .cards-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+    .year-card { height: 220px; }
+    .year { font-size: 2.5rem; }
+    .counter-value { font-size: 1.5rem; }
+    .epigraph p { font-size: 1rem; }
+    .transition-text { font-size: 0.9rem; }
+    .parallax-transition { height: 100px; margin: 20px 0; }
+}
+
+@media (max-width: 480px) {
+    .glitch { font-size: 2rem; }
+    .subtitle { font-size: 1rem; }
+    .description { font-size: 0.9rem; }
+    .year-card { height: 180px; }
+    .year { font-size: 2rem; }
+    .event { font-size: 0.8rem; }
+}
+
+@media (min-width: 2560px) {
+    .cards-container { max-width: 1600px; }
+    .glitch { font-size: 8rem; }
+    .subtitle { font-size: 2.5rem; }
+    .description { font-size: 1.4rem; }
+    .cards-grid { gap: 50px; }
+    .year-card { height: 400px; }
+    .year { font-size: 4.5rem; }
+    .event { font-size: 1.3rem; }
+}
+/* ===== КНОПКА МУЗЫКИ (MAFIA) ===== */
+.music-control {
+    background: rgba(0, 0, 0, 0.6) !important;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(201, 168, 123, 0.4) !important;
+    transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1) !important;
+}
+
+.music-control:hover {
+    transform: scale(1.1) rotate(-5deg) !important;
+    background: rgba(170, 62, 62, 0.7) !important;
+    border-color: rgba(201, 168, 123, 0.8) !important;
+    box-shadow: 0 0 20px rgba(170, 62, 62, 0.5) !important;
+}
+
+.music-icon {
+    font-size: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.music-control:hover .music-icon {
+    transform: scale(1.1);
+}
+
+.main-page {
+    min-height: 100vh;
+    height: auto;
+    overflow: visible;
+}
+/* ========== ГЛОБАЛЬНЫЙ ФИКС СКРОЛЛА ДЛЯ ВСЕХ СТРАНИЦ ========== */
+/* Убираем скролл у всех элементов, кроме body */
+*:not(body) {
+    overflow: visible !important;
+}
+
+/* У body оставляем скролл */
+body {
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+}
+.page-container, .content-card, .year-header, .accordion {
+    transform: translateZ(0); /* Включаем аппаратное ускорение */
+    backface-visibility: hidden;
+    will-change: transform; /* Говорим браузеру: "готовься, будет движение" */
+}

@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Хроника Распада | Начать</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Cormorant+Garamond:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: 'Playfair Display', serif;
+            overflow: hidden;
+            position: relative;
+            background: #000;
+        }
+
+        /* ========== ВИДЕО ФОН ========== */
+        .video-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            object-fit: cover;
+            filter: brightness(0.85) contrast(1.05) saturate(1.1);
+            transition: transform 0.1s ease-out;
+        }
+
+        /* Затемнение для лучшей читаемости */
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.4) 100%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* ========== КИНЕМАТОГРАФИЧНЫЕ ЭФФЕКТЫ ========== */
+        
+        /* Хроматическая аберрация (эффект цветного размытия) */
+        .chromatic-aberration {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 3;
+            mix-blend-mode: screen;
+            background: radial-gradient(circle at 50% 50%, transparent 60%, rgba(255, 0, 0, 0.05) 100%);
+            animation: chromaticShift 6s ease-in-out infinite;
+        }
+
+        @keyframes chromaticShift {
+            0%, 100% {
+                box-shadow: inset 0 0 50px rgba(255, 0, 0, 0.02), inset 0 0 30px rgba(0, 255, 255, 0.02);
+            }
+            50% {
+                box-shadow: inset 0 0 80px rgba(255, 0, 0, 0.05), inset 0 0 50px rgba(0, 255, 255, 0.05);
+            }
+        }
+
+        /* Эффект старой кинопленки (легкое мерцание) */
+        .film-flicker {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 4;
+            background: repeating-linear-gradient(0deg, 
+                rgba(0, 0, 0, 0.05) 0px, 
+                rgba(0, 0, 0, 0.05) 2px, 
+                transparent 2px, 
+                transparent 6px);
+            opacity: 0.3;
+            animation: flicker 0.2s infinite;
+        }
+
+        @keyframes flicker {
+            0% { opacity: 0.2; }
+            50% { opacity: 0.4; }
+            100% { opacity: 0.2; }
+        }
+
+        /* Динамическая виньетка */
+        .dynamic-vignette {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+            background: radial-gradient(ellipse at center, transparent 50%, rgba(0, 0, 0, 0.6) 100%);
+            animation: vignetteBreathing 4s ease-in-out infinite;
+        }
+
+        @keyframes vignetteBreathing {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+
+        /* Легкое свечение по краям */
+        .edge-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 6;
+            box-shadow: inset 0 0 100px rgba(201, 168, 123, 0.15);
+            animation: edgePulse 5s ease-in-out infinite;
+        }
+
+        @keyframes edgePulse {
+            0%, 100% { box-shadow: inset 0 0 80px rgba(201, 168, 123, 0.1); }
+            50% { box-shadow: inset 0 0 150px rgba(201, 168, 123, 0.2); }
+        }
+
+        /* ========== ОСНОВНОЙ КОНТЕЙНЕР ========== */
+        .start-container {
+            position: relative;
+            z-index: 20;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            animation: fadeInContainer 1.5s ease-out forwards;
+        }
+
+        @keyframes fadeInContainer {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Логотип */
+        .logo {
+            text-align: center;
+            margin-bottom: 60px;
+            background: rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(20px);
+            padding: 25px 50px;
+            border-radius: 80px;
+            border: 1px solid rgba(201, 168, 123, 0.4);
+            animation: logoGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes logoGlow {
+            0%, 100% { border-color: rgba(201, 168, 123, 0.3); box-shadow: 0 0 20px rgba(201, 168, 123, 0.1); }
+            50% { border-color: rgba(201, 168, 123, 0.6); box-shadow: 0 0 40px rgba(201, 168, 123, 0.2); }
+        }
+
+        .logo h1 {
+            font-size: 5rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+            letter-spacing: 8px;
+            background: linear-gradient(135deg, #fff, #c9a87b, #aa6e4a);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .logo p {
+            font-size: 1rem;
+            letter-spacing: 4px;
+            color: rgba(255, 240, 200, 0.9);
+            margin-top: 20px;
+            font-family: monospace;
+        }
+
+        .logo .years {
+            font-size: 1.2rem;
+            letter-spacing: 6px;
+            color: #c9a87b;
+            margin-top: 10px;
+        }
+
+        /* ========== КНОПКА (СТАРАЯ, БЛАГОРОДНАЯ, БЕЗ НЕОНА) ========== */
+.big-button {
+    position: relative;
+    width: 320px;
+    height: 320px;
+    margin: 40px auto;
+    cursor: pointer;
+    user-select: none;
+}
+
+.button-outer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #3a2e24, #1e1915);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), inset 0 1px 2px rgba(255, 255, 200, 0.15);
+    transition: all 0.2s ease;
+    border: 1px solid rgba(150, 120, 80, 0.4);
+}
+
+.button-inner {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #5a4a38, #2a221c);
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.6), 0 3px 8px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.button-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: 6px;
+    background: linear-gradient(135deg, #e8e0c8, #b8a06c);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-transform: uppercase;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.button-sub {
+    position: absolute;
+    bottom: -45px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 0.75rem;
+    color: rgba(200, 180, 140, 0.6);
+    font-family: monospace;
+    letter-spacing: 2px;
+}
+
+/* Эффект нажатия (продавливание) */
+.big-button.pressed .button-outer {
+    transform: scale(0.97);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+}
+
+.big-button.pressed .button-inner {
+    transform: scale(0.98);
+}
+
+/* При наведении — только легкое увеличение текста, без свечения */
+.big-button:hover .button-text {
+    transform: scale(1.02);
+    transition: transform 0.2s ease;
+}
+
+.big-button:hover .button-outer {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 35px rgba(0, 0, 0, 0.6);
+    border-color: rgba(150, 120, 80, 0.6);
+}
+
+.big-button:hover .button-inner {
+    background: radial-gradient(circle at 30% 30%, #6a553f, #32281f);
+}
+        /* Цитата */
+        .quote {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            font-size: 0.9rem;
+            color: rgba(255, 240, 200, 0.7);
+            font-style: italic;
+            font-family: 'Cormorant Garamond', serif;
+            background: rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(12px);
+            padding: 10px 24px;
+            border-radius: 40px;
+            white-space: nowrap;
+            z-index: 20;
+            animation: quotePulse 4s ease-in-out infinite;
+        }
+
+        @keyframes quotePulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        .quote span {
+            color: #c9a87b;
+        }
+
+        /* Адаптация */
+        @media (max-width: 768px) {
+            .logo h1 { font-size: 2.5rem; letter-spacing: 4px; }
+            .logo p { font-size: 0.7rem; letter-spacing: 2px; }
+            .logo .years { font-size: 0.9rem; letter-spacing: 3px; }
+            .big-button { width: 240px; height: 240px; }
+            .button-text { font-size: 1.8rem; letter-spacing: 3px; }
+            .quote { font-size: 0.7rem; white-space: nowrap; bottom: 20px; }
+            .logo { padding: 15px 30px; }
+        }
+
+        @media (max-width: 480px) {
+            .logo h1 { font-size: 1.6rem; letter-spacing: 2px; }
+            .big-button { width: 200px; height: 200px; }
+            .button-text { font-size: 1.4rem; letter-spacing: 2px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- ВИДЕО ФОН -->
+    <video class="video-bg" id="forestVideo" autoplay loop muted playsinline>
+        <!-- ↓↓↓ ПУТЬ К ВИДЕО ↓↓↓ -->
+        <source src="videos/forest-sunlight.mp4" type="video/mp4">
+        Ваш браузер не поддерживает видео.
+    </video>
+    <div class="video-overlay"></div>
+    
+    <!-- КИНЕМАТОГРАФИЧНЫЕ ЭФФЕКТЫ -->
+    <div class="chromatic-aberration"></div>
+    <div class="film-flicker"></div>
+    <div class="dynamic-vignette"></div>
+    <div class="edge-glow"></div>
+
+    <div class="start-container">
+        <div class="logo">
+            <h1>РАСПАД СССР</h1>
+            <p>ИСТОРИЧЕСКАЯ ХРОНИКА</p>
+            <div class="years">1985 ✧ 1987 ✧ 1989 ✧ 1990 ✧ 1991 ✧ 1992 ✧ 1993</div>
+        </div>
+
+        <div class="big-button" id="startButton">
+            <div class="button-outer"></div>
+            <div class="button-inner">
+                <span class="button-text">НАЧАТЬ</span>
+            </div>
+            <div class="button-sub">▼ НАЖМИТЕ ▼</div>
+        </div>
+
+        <div class="quote">
+            «Мы потеряли великую страну»<br>
+            <span>— В.В. Путин, 2005</span>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script>
+        // ========== КИНЕМАТОГРАФИЧНЫЕ ЭФФЕКТЫ С GSAP ==========
+        
+        // 1. Плавная пульсация виньетки
+        gsap.to(".dynamic-vignette", {
+            duration: 3,
+            scale: 1.02,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut"
+        });
+        
+        // 2. Легкое покачивание краевого свечения
+        gsap.to(".edge-glow", {
+            duration: 4,
+            opacity: 0.7,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut"
+        });
+        
+        // 3. Параллакс для видео (движение за мышью)
+        const videoBg = document.getElementById('forestVideo');
+        if (videoBg) {
+            let mouseX = 0, mouseY = 0;
+            let targetX = 0, targetY = 0;
+            
+            document.addEventListener('mousemove', (e) => {
+                mouseX = (e.clientX / window.innerWidth - 0.5) * 15;
+                mouseY = (e.clientY / window.innerHeight - 0.5) * 10;
+            });
+            
+            function animateParallax() {
+                targetX += (mouseX - targetX) * 0.05;
+                targetY += (mouseY - targetY) * 0.05;
+                videoBg.style.transform = `translate(${targetX}px, ${targetY}px) scale(1.02)`;
+                requestAnimationFrame(animateParallax);
+            }
+            animateParallax();
+        }
+        
+        // 4. Хроматическая аберрация с GSAP (легкое цветовое колебание)
+        gsap.to(".chromatic-aberration", {
+            duration: 2.5,
+            opacity: 0.6,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut",
+            onUpdate: function() {
+                const intensity = 0.02 + Math.random() * 0.03;
+                document.querySelector(".chromatic-aberration").style.boxShadow = 
+                    `inset 0 0 ${50 + Math.random() * 30}px rgba(255, 0, 0, ${intensity}), 
+                     inset 0 0 ${30 + Math.random() * 20}px rgba(0, 255, 255, ${intensity})`;
+            }
+        });
+        
+        // 5. Анимация для кнопки при наведении (глитч-эффект)
+        const button = document.getElementById('startButton');
+        const buttonText = document.querySelector('.button-text');
+        
+        button.addEventListener('mouseenter', () => {
+            gsap.to(buttonText, {
+                duration: 0.1,
+                textShadow: "-2px 0 red, 2px 0 blue",
+                repeat: 3,
+                yoyo: true,
+                ease: "steps(1)"
+            });
+        });
+        
+        // ========== ЗВУКИ ЛЕСА ==========
+        let forestSound = null;
+        let isForestPlaying = false;
+        
+        function initForestSound() {
+            if (forestSound) return;
+            
+            
+            forestSound = new Howl({
+                src: [
+                    'sounds/forest-ambience.mp3',      // птицы
+                    'sounds/minianimals.mp3',   // общая атмосфера
+                    'sounds/hoursenear.mp3'        // шелест листьев
+                ],
+                loop: true,
+                volume: 0.3,
+                autoplay: false,
+                html5: true,
+                onload: function() {
+                    console.log('Звуки леса загружены');
+                },
+                onloaderror: function(id, err) {
+                    console.error('Ошибка загрузки звуков леса:', err);
+                    console.log('Проверьте, что файлы лежат в папке sounds/');
+                }
+            });
+        }
+        
+        function startForestSound() {
+            if (isForestPlaying) return;
+            initForestSound();
+            if (forestSound) {
+                forestSound.play();
+                isForestPlaying = true;
+                console.log('🎵 Звуки леса включены');
+            }
+        }
+        
+        function stopForestSound() {
+            if (!isForestPlaying) return;
+            if (forestSound) {
+                forestSound.stop();
+                isForestPlaying = false;
+                console.log('🎵 Звуки леса остановлены');
+            }
+        }
+        
+        // ========== КНОПКА И ПЕРЕХОД ==========
+        button.addEventListener('mousedown', () => {
+            button.classList.add('pressed');
+        });
+        
+        button.addEventListener('mouseup', () => {
+            button.classList.remove('pressed');
+        });
+        
+        button.addEventListener('mouseleave', () => {
+            button.classList.remove('pressed');
+        });
+        
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            button.classList.add('pressed');
+            
+            // Плавное затухание звука
+            if (forestSound) {
+                forestSound.fade(0.3, 0, 800);
+            }
+            
+            // Создаем эффект затемнения
+            const overlay = document.createElement('div');
+            overlay.style.cssText = `
+                position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                background: #000; z-index: 9999; opacity: 0;
+                transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+                pointer-events: none;
+            `;
+            document.body.appendChild(overlay);
+            
+            // Анимация исчезновения контента
+            const container = document.querySelector('.start-container');
+            gsap.to(container, {
+                duration: 0.5,
+                opacity: 0,
+                ease: "power2.in"
+            });
+            
+            // Затемнение и переход
+            setTimeout(() => overlay.style.opacity = '1', 50);
+            setTimeout(() => {
+                window.location.href = 'loader.html';
+            }, 900);
+        });
+        
+        // ========== АВТОМАТИЧЕСКОЕ ВКЛЮЧЕНИЕ ЗВУКОВ ==========
+        let soundsUnlocked = false;
+        function autoStartSounds() {
+            if (soundsUnlocked) return;
+            startForestSound();
+            soundsUnlocked = true;
+            document.removeEventListener('click', autoStartSounds);
+            document.removeEventListener('scroll', autoStartSounds);
+            document.removeEventListener('keydown', autoStartSounds);
+        }
+        document.addEventListener('click', autoStartSounds);
+        document.addEventListener('scroll', autoStartSounds);
+        document.addEventListener('keydown', autoStartSounds);
+        
+        // ========== ДОПОЛНИТЕЛЬНО: АНИМАЦИЯ ЛОГОТИПА ==========
+        gsap.fromTo(".logo", 
+            { y: 30, opacity: 0 },
+            { y: 0, opacity: 1, duration: 1.2, delay: 0.3, ease: "power3.out" }
+        );
+        
+        gsap.fromTo(".big-button", 
+            { scale: 0.9, opacity: 0 },
+            { scale: 1, opacity: 1, duration: 1, delay: 0.6, ease: "backOut(0.4)" }
+        );
+        
+        gsap.fromTo(".quote", 
+            { y: 20, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.8, delay: 0.9, ease: "power2.out" }
+        );
+        
+        console.log('Кинематографичные эффекты активированы! Ждем ваше видео и звуки леса.');
+    </script>
+<script>
+    // ========== ТИХИЙ СТАРТ МУЗЫКИ ДЛЯ СТАРТОВОЙ СТРАНИЦЫ ==========
+    let bgMusic = null;
+    let musicStarted = false;
+    let fadeInterval = null;
+    
+    function initMusic() {
+        if (bgMusic) return;
+        
+        bgMusic = new Howl({
+            src: ['sounds/forest-ambience.mp3'],
+            loop: true,
+            volume: 0,
+            autoplay: true,
+            html5: true,
+            onplay: () => {
+                console.log('Музыка началась (тихий старт)');
+                fadeInMusic();
+            },
+            onplayerror: () => {
+                console.log('Автовоспроизведение заблокировано');
+                // На стартовой странице будет кнопка "Начать", которая и так есть
+                // Просто ждем, пока пользователь нажмет
+            }
+        });
+    }
+    
+    function fadeInMusic() {
+        if (fadeInterval) clearInterval(fadeInterval);
+        let volume = 0;
+        fadeInterval = setInterval(() => {
+            if (volume < 0.2) {
+                volume += 0.01;
+                bgMusic.volume(volume);
+            } else {
+                clearInterval(fadeInterval);
+                fadeInterval = null;
+            }
+        }, 50);
+    }
+    
+    // Ждем нажатия на кнопку "Начать" (она уже есть на странице)
+    const startButton = document.getElementById('startButton');
+    if (startButton) {
+        startButton.addEventListener('click', () => {
+            if (bgMusic && !bgMusic.playing()) {
+                bgMusic.play();
+                fadeInMusic();
+                musicStarted = true;
+            }
+        });
+    }
+    
+    // Также пробуем при загрузке
+    window.addEventListener('load', initMusic);
+    
+    console.log('Тихий старт для start.html активирован');
+</script>
+</body>
+</html>
