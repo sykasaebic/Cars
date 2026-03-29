@@ -1,0 +1,62 @@
+/* ========== КОМПЛЕКСНЫЙ ФИКС СКРОЛЛА ДЛЯ СТРАНИЦЫ 1993 ========== */
+
+/* 1. Базовый фикс: всегда показываем скролл */
+html {
+    overflow-y: scroll !important;
+    overflow-x: hidden !important;
+    scroll-behavior: smooth;
+}
+
+/* 2. Убираем двойной скролл */
+body {
+    overflow-x: hidden !important;
+    overflow-y: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* 3. Профессиональный фикс через scrollbar-gutter */
+html {
+    scrollbar-gutter: stable !important;
+}
+
+/* 4. Фикс ширины через calc() */
+body {
+    padding-right: calc(100vw - 100%) !important;
+}
+
+/* 5. Скрываем визуально скролл-бар (но оставляем прокрутку) */
+body {
+    overflow-y: scroll !important;
+    scrollbar-width: none !important; /* Firefox */
+    -ms-overflow-style: none !important; /* IE/Edge */
+}
+
+body::-webkit-scrollbar {
+    display: none !important; /* Chrome, Safari, Opera */
+}
+
+/* 6. Запрещаем любым внутренним элементам создавать свой скролл */
+* {
+    overflow: visible !important;
+    overflow-y: visible !important;
+    overflow-x: visible !important;
+}
+
+/* 7. Специально для контейнеров */
+.page-container, .content-card, .accordion, .accordion-item, .accordion-content,
+.video-block, .pulsing-map, .modal, .modal-content {
+    overflow: visible !important;
+    overflow-y: visible !important;
+}
+
+/* 8. Фикс для аккордеонов — запрещаем якорную прокрутку */
+.accordion-content {
+    overflow-anchor: none !important;
+}
+
+/* 9. Стабилизация позиции при открытии аккордеонов */
+.accordion-item {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
