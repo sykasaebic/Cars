@@ -1,0 +1,252 @@
+/* ========== ФИКСЫ СКРОЛЛА ========== */
+html {
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+body {
+    overflow-x: hidden;
+    overflow-y: visible;
+}
+
+/* Убираем двойной скролл-бар — только один */
+::-webkit-scrollbar {
+    width: 7px;
+}
+
+::-webkit-scrollbar-track {
+    background: #000000;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #00010c;
+    border-radius: 7px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #c00000;
+}
+
+/* ========== СТИЛИ ДЛЯ 1985 ГОДА (БЕЗ ТРЯСКИ) ========== */
+
+:root {
+    --year-accent: #c9a87b;
+    --year-accent-glow: rgba(201, 168, 123, 0.3);
+}
+
+/* ФОН */
+.dynamic-bg {
+    position: absolute; /* Меняем на absolute */
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100%; /* Растягиваем на всю высоту контента */
+    z-index: -2;
+    background: linear-gradient(135deg, #2a2418, #0a0a0a);
+}
+
+/* КОНТЕЙНЕР */
+.page-container {
+    max-width: 1000px;
+    width: 90%;
+    margin: 0 auto;
+    padding: 40px 20px 80px 20px;
+    position: relative;
+    z-index: 10;
+}
+
+/* КНОПКА НАЗАД */
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 50px;
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    font-size: 0.9rem;
+    padding: 10px 24px;
+    border-radius: 40px;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.back-link:hover {
+    background: var(--year-accent);
+    color: #000;
+    transform: translateX(-5px);
+}
+
+/* ЗАГОЛОВОК */
+.year-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.year-header h1 {
+    font-size: 8rem;
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    background: linear-gradient(135deg, #fff, var(--year-accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: 8px;
+}
+
+.year-header h2 {
+    font-size: 1.6rem;
+    font-weight: 400;
+    margin-top: 20px;
+    letter-spacing: 3px;
+    color: var(--year-accent);
+}
+
+.year-divider {
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--year-accent), transparent);
+    margin: 25px auto 0;
+    border-radius: 3px;
+}
+
+/* КАРТОЧКА (БЕЗ 3D) */
+.content-card {
+    background: rgba(10, 10, 15, 0.7);
+    backdrop-filter: blur(20px);
+    border-radius: 32px;
+    padding: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.content-card p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* АККОРДЕОНЫ */
+.accordion {
+    margin-top: 40px;
+}
+
+.accordion-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.accordion-header {
+    padding: 22px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 1.2rem;
+    color: #fff;
+    transition: all 0.2s ease;
+}
+
+.accordion-header:hover {
+    color: var(--year-accent);
+}
+
+.accordion-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.accordion-symbol {
+    font-size: 1.2rem;
+    color: var(--year-accent);
+}
+
+.accordion-icon {
+    font-size: 1.6rem;
+    transition: transform 0.2s ease;
+}
+
+.accordion-item.active .accordion-icon {
+    transform: rotate(45deg);
+    color: var(--year-accent);
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.accordion-item.active .accordion-content {
+    max-height: 500px;
+    padding-bottom: 25px;
+}
+
+.accordion-content ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.accordion-content li {
+    padding: 12px 0 12px 20px;
+    border-left: 3px solid var(--year-accent);
+    margin-bottom: 12px;
+}
+
+/* ПОДВАЛ */
+footer {
+    text-align: center;
+    padding: 50px 0 20px;
+    margin-top: 60px;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.75rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* КНОПКА ЗВУКА */
+.sound-control {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 1001;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(201, 168, 123, 0.4);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.sound-control:hover {
+    transform: scale(1.05);
+    background: rgba(170, 62, 62, 0.7);
+}
+
+/* АДАПТАЦИЯ */
+@media (max-width: 768px) {
+    .year-header h1 { font-size: 4rem; letter-spacing: 4px; }
+    .year-header h2 { font-size: 1.2rem; }
+    .content-card { padding: 30px; }
+    .accordion-header { font-size: 1rem; }
+    .sound-control { width: 40px; height: 40px; font-size: 1.2rem; }
+}
+/* ========== ГЛОБАЛЬНЫЙ ФИКС СКРОЛЛА ДЛЯ ВСЕХ СТРАНИЦ ========== */
+/* Убираем скролл у всех элементов, кроме body */
+*:not(body) {
+    overflow: visible !important;
+}
+
+/* У body оставляем скролл */
+body {
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+}
