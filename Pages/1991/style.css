@@ -1,0 +1,373 @@
+/* ========== КРОВАВЫЙ СТИЛЬ ДЛЯ 1991 ГОДА ========== */
+
+:root {
+    --blood-red: #aa1a1a;
+    --blood-dark: #4a0808;
+    --blood-glow: rgba(170, 26, 26, 0.6);
+}
+
+.year-1991 {
+    background: #000;
+}
+
+/* КРОВАВЫЙ ФОН */
+.blood-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    background: radial-gradient(ellipse at 50% 30%, #1a0505, #000000);
+}
+
+.blood-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(170, 26, 26, 0.05) 0px,
+        rgba(170, 26, 26, 0.05) 2px,
+        transparent 2px,
+        transparent 8px
+    );
+    pointer-events: none;
+}
+
+/* КРОВАВЫЙ ОВЕРЛЕЙ */
+.blood-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+    background: radial-gradient(circle at 50% 50%, transparent 50%, rgba(170, 26, 26, 0.15) 100%);
+    animation: bloodPulse 4s ease-in-out infinite;
+}
+
+@keyframes bloodPulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.8; }
+}
+
+/* КРАСНАЯ ВИНЬЕТКА */
+.vignette-red {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 6;
+    background: radial-gradient(ellipse at center, transparent 40%, rgba(170, 26, 26, 0.4) 100%);
+}
+
+/* КАПЛИ КРОВИ */
+.blood-drops {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 4;
+}
+
+.blood-drop {
+    position: absolute;
+    background: radial-gradient(ellipse at 30% 30%, rgba(200, 30, 30, 0.6), rgba(100, 10, 10, 0.3));
+    border-radius: 50%;
+    filter: blur(3px);
+    animation: bloodFall linear infinite;
+}
+
+@keyframes bloodFall {
+    0% {
+        transform: translateY(-20px) translateX(0) scale(0.5);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.7;
+    }
+    90% {
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateY(100vh) translateX(20px) scale(1.2);
+        opacity: 0;
+    }
+}
+
+/* ОСНОВНОЙ КОНТЕЙНЕР */
+.page-container {
+    max-width: 1000px;
+    width: 90%;
+    margin: 0 auto;
+    padding: 40px 20px 80px 20px;
+    position: relative;
+    z-index: 10;
+}
+
+/* КНОПКА НАЗАД */
+.back-link-1991 {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 50px;
+    color: rgba(255, 200, 200, 0.7);
+    text-decoration: none;
+    font-size: 0.9rem;
+    padding: 10px 24px;
+    border-radius: 40px;
+    background: rgba(170, 26, 26, 0.3);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(170, 26, 26, 0.5);
+    transition: all 0.3s ease;
+}
+
+.back-link-1991:hover {
+    background: var(--blood-red);
+    color: #fff;
+    transform: translateX(-5px);
+    border-color: #fff;
+}
+
+/* ЗАГОЛОВОК */
+.year-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.blood-title {
+    font-size: 9rem;
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    background: linear-gradient(135deg, #fff, var(--blood-red), #4a0000);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 50px var(--blood-glow);
+    letter-spacing: 12px;
+    position: relative;
+    animation: bloodTitlePulse 2s ease-in-out infinite;
+}
+
+@keyframes bloodTitlePulse {
+    0%, 100% { text-shadow: 0 0 20px var(--blood-glow); }
+    50% { text-shadow: 0 0 60px var(--blood-red); }
+}
+
+/* ОБЕРТКА ДЛЯ ПОДЗАГОЛОВКА (для читаемости) */
+.subtitle-wrapper {
+    display: inline-block;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    padding: 12px 28px;
+    border-radius: 50px;
+    margin-top: 25px;
+    border: 1px solid rgba(170, 26, 26, 0.5);
+}
+
+.blood-subtitle {
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: 4px;
+    color: #ff4444;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+    animation: subtitleFlicker 1.5s step-end infinite;
+}
+
+@keyframes subtitleFlicker {
+    0%, 100% { opacity: 1; text-shadow: 0 0 10px rgba(255, 0, 0, 0.5); }
+    50% { opacity: 0.7; text-shadow: 0 0 20px rgba(255, 0, 0, 0.8); }
+}
+
+.blood-divider {
+    width: 120px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--blood-red), #ff4444, var(--blood-red), transparent);
+    margin: 25px auto 0;
+    border-radius: 2px;
+    animation: dividerPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes dividerPulse {
+    0%, 100% { opacity: 0.5; width: 120px; }
+    50% { opacity: 1; width: 180px; }
+}
+
+.date-stamp {
+    font-size: 0.8rem;
+    letter-spacing: 3px;
+    color: var(--blood-red);
+    margin-top: 15px;
+    font-family: monospace;
+    text-transform: uppercase;
+}
+
+/* КРОВАВАЯ КАРТОЧКА */
+.blood-card {
+    background: rgba(10, 5, 5, 0.85);
+    backdrop-filter: blur(20px);
+    border-radius: 32px;
+    padding: 50px;
+    border: 1px solid rgba(170, 26, 26, 0.5);
+    transition: all 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    box-shadow: 0 25px 50px -12px rgba(170, 26, 26, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.blood-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(170, 26, 26, 0.1), transparent);
+    animation: cardBloodGlow 6s ease-in-out infinite;
+}
+
+@keyframes cardBloodGlow {
+    0%, 100% { transform: translate(0, 0); opacity: 0.3; }
+    50% { transform: translate(10%, 10%); opacity: 0.6; }
+}
+
+.blood-card:hover {
+    transform: translateY(-8px) scale(1.01);
+    border-color: var(--blood-red);
+    box-shadow: 0 30px 60px -12px rgba(170, 26, 26, 0.5);
+}
+
+.blood-card p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.blood-text {
+    border-left: 3px solid var(--blood-red);
+    padding-left: 20px;
+    font-style: italic;
+}
+
+/* ========== АККОРДЕОНЫ (ИСПРАВЛЕНЫ) ========== */
+.accordion {
+    margin-top: 40px;
+    width: 100%;
+}
+
+.accordion-item {
+    border-bottom: 1px solid rgba(170, 26, 26, 0.3);
+    overflow-anchor: none;
+}
+
+.accordion-header {
+    padding: 22px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 1.2rem;
+    color: #fff;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+}
+
+.accordion-header:hover {
+    color: var(--blood-red);
+    padding-left: 15px;
+    background: rgba(170, 26, 26, 0.05);
+}
+
+.accordion-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.accordion-symbol {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    font-size: 1.3rem;
+    color: var(--blood-red);
+    transition: all 0.3s ease;
+}
+
+.accordion-header:hover .accordion-symbol {
+    transform: scale(1.2) rotate(10deg);
+}
+
+.accordion-icon {
+    font-size: 1.6rem;
+    transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.accordion-item.active .accordion-icon {
+    transform: rotate(45deg) scale(1.1);
+    color: var(--blood-red);
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0.33, 1, 0.68, 1);
+    padding: 0;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.accordion-item.active .accordion-content {
+    max-height: 500px;
+    padding-bottom: 25px;
+}
+
+.accordion-content ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.accordion-content li {
+    padding: 12px 0 12px 20px;
+    border-left: 3px solid var(--blood-red);
+    margin-bottom: 12px;
+    transition: all 0.3s ease;
+}
+
+.accordion-content li:hover {
+    border-left-width: 4px;
+    padding-left: 28px;
+    background: rgba(170, 26, 26, 0.1);
+}
+
+/* ПОДВАЛ */
+.blood-footer {
+    text-align: center;
+    padding: 50px 0 20px;
+    margin-top: 60px;
+    color: rgba(170, 26, 26, 0.6);
+    font-size: 0.7rem;
+    border-top: 1px solid rgba(170, 26, 26, 0.3);
+}
+
+/* АДАПТАЦИЯ */
+@media (max-width: 768px) {
+    .blood-title { font-size: 5rem; letter-spacing: 6px; }
+    .blood-subtitle { font-size: 0.8rem; letter-spacing: 2px; }
+    .subtitle-wrapper { padding: 8px 16px; }
+    .blood-card { padding: 30px; }
+    .date-stamp { font-size: 0.6rem; }
+    .accordion-header { font-size: 1rem; }
+}
