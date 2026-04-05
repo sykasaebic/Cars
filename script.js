@@ -62,22 +62,22 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // ========== 3. ОГОНЬ НА КАРТОЧКЕ 1991 ==========
-    function addFireTo1991Card() {
-        const card1991 = document.querySelector('.year-card[data-year="1991"]');
-        if (card1991 && !card1991.querySelector('.fire-overlay')) {
-            const fireOverlay = document.createElement('div');
-            fireOverlay.className = 'fire-overlay';
-            card1991.appendChild(fireOverlay);
+   // function addFireTo1991Card() {
+       // const card1991 = document.querySelector('.year-card[data-year="1991"]');
+      //  if (card1991 && !card1991.querySelector('.fire-overlay')) {
+          //  const fireOverlay = document.createElement('div');
+          //  fireOverlay.className = 'fire-overlay';
+          //  card1991.appendChild(fireOverlay);
             
-            setInterval(() => {
-                if (fireOverlay) {
-                    const intensity = 0.6 + Math.random() * 0.4;
-                    fireOverlay.style.opacity = intensity;
-                }
-            }, 150);
-        }
-    }
-    addFireTo1991Card();
+          //  setInterval(() => {
+               // if (fireOverlay) {
+                   // const intensity = 0.6 + Math.random() * 0.4;
+               //     fireOverlay.style.opacity = intensity;
+              //  }
+          //  }, 150);
+     //   }
+ //   }
+  //  addFireTo1991Card();
     
     // ========== 4. ЦИТАТЫ (УБРАНЫ, Т.К. НЕЧИТАЕМЫ) ==========
 // Цитаты были удалены для улучшения читаемости интерфейса
