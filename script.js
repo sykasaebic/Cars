@@ -1,39 +1,90 @@
 document.addEventListener('DOMContentLoaded', function() {
     
     // ========== 1. ДОЖДЬ ==========
-    function createRain() {
+    let rainInterval = null; // Глобальная переменная для интервала
+
+function createRain() {
     const rainContainer = document.getElementById('rain');
-    if (!rainContainer) return;
+    if (!rainContainer) {
+        console.error('❌ Контейнер #rain не найден');
+        return;
+    }
     
-    const MAX_DROPS = 150; // Уменьшил с 300 до 150 для производительности
+    console.log('🌧️ Запуск дождя...');
+    
+    // Очищаем старый интервал, если он был
+    if (rainInterval) {
+        clearInterval(rainInterval);
+        rainInterval = null;
+    }
+    
+    // Очищаем контейнер от старых капель
+    rainContainer.innerHTML = '';
+    
+    const numberOfDrops = window.innerWidth < 768 ? 60 : 120;
     const dropSizes = ['small', 'medium', 'large'];
-    let dropsQueue = []; // Очередь для FIFO удаления
     
     // Создаём начальные капли
-    const initialDrops = window.innerWidth < 768 ? 60 : 100;
-    for (let i = 0; i < initialDrops; i++) {
-        addDrop();
-    }
-    
-    function addDrop() {
+    for (let i = 0; i < numberOfDrops; i++) {
         const drop = document.createElement('div');
-        drop.classList.add('drop', dropSizes[Math.floor(Math.random() * dropSizes.length)]);
-        drop.style.left = `${Math.random() * 100}%`;
-        drop.style.animationDelay = `${Math.random() * 5}s`;
-        drop.style.animationDuration = `${0.8 + Math.random() * 1.2}s`;
+        drop.classList.add('drop');
+        const sizeClass = dropSizes[Math.floor(Math.random() * dropSizes.length)];
+        drop.classList.add(sizeClass);
+        drop.style.left = `${Math.random() * 100}%`;  // ← Исправлено: добавлены кавычки
+        drop.style.animationDelay = `${Math.random() * 10}s`;  // ← Исправлено
+        drop.style.animationDuration = `${0.5 + Math.random() * 1}s`;  // ← Исправлено
         rainContainer.appendChild(drop);
-        dropsQueue.push(drop);
-        
-        // Удаляем самые старые капли, если превысили лимит
-        if (dropsQueue.length > MAX_DROPS) {
-            const oldest = dropsQueue.shift();
-            if (oldest && oldest.parentNode) oldest.remove();
-        }
     }
     
-    // Интервал для добавления новых капель (используем safeInterval)
-    safeInterval(addDrop, 200);
+    // Интервал для добавления новых капель (сохраняем ID для очистки)
+    rainInterval = setInterval(() => {
+        // Проверяем, существует ли ещё контейнер
+        if (!rainContainer || !rainContainer.parentNode) {
+            if (rainInterval) {
+                clearInterval(rainInterval);
+                rainInterval = null;
+            }
+            return;
+        }
+        
+        // Ограничиваем количество капель (удаляем самые старые)
+        while (rainContainer.children.length > 250) {
+            const oldest = rainContainer.children[0];
+            if (oldest) oldest.remove();
+        }
+        
+        // Добавляем новую каплю
+        const newDrop = document.createElement('div');
+        newDrop.classList.add('drop');
+        const sizeClass = dropSizes[Math.floor(Math.random() * dropSizes.length)];
+        newDrop.classList.add(sizeClass);
+        newDrop.style.left = `${Math.random() * 100}%`;  // ← Исправлено
+        newDrop.style.animationDelay = '0s';
+        newDrop.style.animationDuration = `${0.5 + Math.random() * 1}s`;  // ← Исправлено
+        rainContainer.appendChild(newDrop);
+    }, 150);
+    
+    console.log(`✅ Создано ${numberOfDrops} капель`);
 }
+
+// Очистка при уходе со страницы
+function stopRain() {
+    if (rainInterval) {
+        clearInterval(rainInterval);
+        rainInterval = null;
+        console.log('🌧️ Дождь остановлен');
+    }
+    const rainContainer = document.getElementById('rain');
+    if (rainContainer) {
+        rainContainer.innerHTML = '';
+    }
+}
+
+// Запускаем дождь
+createRain();
+
+// Останавливаем дождь при уходе со страницы
+window.addEventListener('beforeunload', stopRain);
     
     // ========== 2. АККОРДЕОНЫ ==========
     const accordionHeaders = document.querySelectorAll('.accordion-header');
