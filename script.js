@@ -2,42 +2,38 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // ========== 1. ДОЖДЬ ==========
     function createRain() {
-        const rainContainer = document.getElementById('rain');
-        if (!rainContainer) return;
-        
-        const numberOfDrops = window.innerWidth < 768 ? 60 : 120;
-        const dropSizes = ['small', 'medium', 'large'];
-        
-        for (let i = 0; i < numberOfDrops; i++) {
-            const drop = document.createElement('div');
-            drop.classList.add('drop');
-            const sizeClass = dropSizes[Math.floor(Math.random() * dropSizes.length)];
-            drop.classList.add(sizeClass);
-            drop.style.left = `${Math.random() * 100}%`;
-            drop.style.animationDelay = `${Math.random() * 10}s`;
-            drop.style.animationDuration = `${0.5 + Math.random() * 1}s`;
-            rainContainer.appendChild(drop);
-        }
-        
-        setInterval(() => {
-            if (rainContainer.children.length > 300) {
-                const dropsToRemove = rainContainer.children.length - 200;
-                for (let i = 0; i < dropsToRemove; i++) {
-                    if (rainContainer.children[i]) rainContainer.removeChild(rainContainer.children[i]);
-                }
-            }
-            
-            const newDrop = document.createElement('div');
-            newDrop.classList.add('drop');
-            const sizeClass = dropSizes[Math.floor(Math.random() * dropSizes.length)];
-            newDrop.classList.add(sizeClass);
-            newDrop.style.left = `${Math.random() * 100}%`;
-            newDrop.style.animationDelay = '0s';
-            newDrop.style.animationDuration = `${0.5 + Math.random() * 1}s`;
-            rainContainer.appendChild(newDrop);
-        }, 150);
+    const rainContainer = document.getElementById('rain');
+    if (!rainContainer) return;
+    
+    const MAX_DROPS = 150; // Уменьшил с 300 до 150 для производительности
+    const dropSizes = ['small', 'medium', 'large'];
+    let dropsQueue = []; // Очередь для FIFO удаления
+    
+    // Создаём начальные капли
+    const initialDrops = window.innerWidth < 768 ? 60 : 100;
+    for (let i = 0; i < initialDrops; i++) {
+        addDrop();
     }
-    createRain();
+    
+    function addDrop() {
+        const drop = document.createElement('div');
+        drop.classList.add('drop', dropSizes[Math.floor(Math.random() * dropSizes.length)]);
+        drop.style.left = `${Math.random() * 100}%`;
+        drop.style.animationDelay = `${Math.random() * 5}s`;
+        drop.style.animationDuration = `${0.8 + Math.random() * 1.2}s`;
+        rainContainer.appendChild(drop);
+        dropsQueue.push(drop);
+        
+        // Удаляем самые старые капли, если превысили лимит
+        if (dropsQueue.length > MAX_DROPS) {
+            const oldest = dropsQueue.shift();
+            if (oldest && oldest.parentNode) oldest.remove();
+        }
+    }
+    
+    // Интервал для добавления новых капель (используем safeInterval)
+    safeInterval(addDrop, 200);
+}
     
     // ========== 2. АККОРДЕОНЫ ==========
     const accordionHeaders = document.querySelectorAll('.accordion-header');
