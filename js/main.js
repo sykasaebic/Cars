@@ -70,7 +70,7 @@ function initRain() {
                     value: 200,
                     density: { enable: true, area: 1000 } 
                 },
-                color: { value: ["#aaddff", "#88bbee", "#6699cc"] }, // Голубоватый оттенок
+                color: { value: "#ff0000" }, // Голубоватый оттенок пока красный для проверки
                 shape: { 
                     type: "line",
                     options: {
@@ -81,12 +81,12 @@ function initRain() {
                     }
                 },
                 opacity: { 
-                    value: 0.7, 
+                    value: 1, // 0.7
                     random: true,
                     animation: { enable: true, speed: 0.8, minimumValue: 0.3 }
                 },
                 size: { 
-                    value: { min: 1, max: 2 }, 
+                    value: { min: 1, max: 4 }, //1 и 2 
                     random: true 
                 },
                 move: {
