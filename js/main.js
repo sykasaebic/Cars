@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
             offset: 100,
             easing: 'ease-out-cubic'
         });
-        console.log('✅ AOS инициализирован');
+        console.log('AOS инициализирован');
     }
     
     // ========== 2. ИНИЦИАЛИЗАЦИЯ SWIPER (Горизонтальный таймлайн) ==========
@@ -42,10 +42,10 @@ document.addEventListener('DOMContentLoaded', function() {
             effect: 'slide',
             speed: 800
         });
-        console.log('✅ Swiper инициализирован');
+        console.log('Swiper инициализирован');
     }
     
-    // ========== 3. ИНИЦИАЛИЗАЦИЯ tsParticles (ДОЖДЬ) ==========
+// ========== 3. ИНИЦИАЛИЗАЦИЯ tsParticles (ДОЖДЬ) ==========
 let particlesInstance = null;
 
 function initRain() {
@@ -55,42 +55,51 @@ function initRain() {
         return;
     }
     
-    // Проверяем, загружена ли библиотека tsParticles
     if (typeof tsParticles === 'undefined') {
         console.error('Библиотека tsParticles не загружена');
         return;
     }
     
-    console.log('Запуск tsParticles');
-    
+    console.log('Запуск ДОЖДЯ');
     
     tsParticles.load({
         id: "rain-container",
         options: {
             particles: {
                 number: { 
-                    value: 150,  //  было 250
-                    density: { enable: true, area: 800 } 
+                    value: 200,
+                    density: { enable: true, area: 1000 } 
                 },
-                color: { value: ["#ffffff", "#e0e0e0", "#c0c0c0"] },
-                shape: { type: "circle" },
+                color: { value: ["#aaddff", "#88bbee", "#6699cc"] }, // Голубоватый оттенок
+                shape: { 
+                    type: "line",
+                    options: {
+                        line: {
+                            length: 8,  // Длина капли
+                            width: 2    // Толщина
+                        }
+                    }
+                },
                 opacity: { 
-                    value: 0.6, 
+                    value: 0.7, 
                     random: true,
-                    animation: { enable: true, speed: 0.5, minimumValue: 0.2 }
+                    animation: { enable: true, speed: 0.8, minimumValue: 0.3 }
                 },
                 size: { 
-                    value: { min: 1, max: 3 }, 
+                    value: { min: 1, max: 2 }, 
                     random: true 
                 },
                 move: {
                     enable: true,
-                    speed: 8,
+                    speed: 12,  // Быстрее падает (капли)
                     direction: "bottom",
                     random: false,
                     straight: true,
-                    outModes: { default: "out" }
-                }
+                    outModes: { default: "out" },
+                    trail: { enable: false }
+                },
+                wobble: { enable: false },  // Без покачиваний
+                tilt: { enable: false }
             },
             interactivity: {
                 events: {
@@ -104,20 +113,17 @@ function initRain() {
         }
     }).then(container => {
         particlesInstance = container;
-        console.log('tsParticles дождь успешно запущен');
+        console.log('ДОЖДЬ запущен');
     }).catch(error => {
-        console.error('Ошибка запуска tsParticles:', error);
+        console.error('Ошибка:', error);
     });
 }
 
-// Запускаем дождь
 initRain();
 
-// Очистка при уходе со страницы
 window.addEventListener('beforeunload', () => {
     if (particlesInstance && particlesInstance.destroy) {
         particlesInstance.destroy();
-        console.log('🌧️ tsParticles дождь остановлен');
     }
 });
     
@@ -134,7 +140,7 @@ window.addEventListener('beforeunload', () => {
     }
     updateDaysCounter();
     
-    // ========== 5. GSAP АНИМАЦИИ (если есть) ==========
+    // ========== 5. GSAP АНИМАЦИИ ==========
     if (typeof gsap !== 'undefined') {
         // Анимация заголовка
         gsap.fromTo(".glitch", 
@@ -157,7 +163,7 @@ window.addEventListener('beforeunload', () => {
             { opacity: 1, scale: 1, duration: 0.8, delay: 0.9, ease: "backOut" }
         );
         
-        console.log('✅ GSAP анимации запущены');
+        console.log('GSAP анимации запущены');
     }
     
     // ========== 6. АККОРДЕОНЫ (без дёрганья) ==========
@@ -184,87 +190,8 @@ window.addEventListener('beforeunload', () => {
         });
     });
     
-    // ========== 7. МОДАЛЬНОЕ ОКНО ДЛЯ ВИДЕО ==========
-    const modal = document.getElementById('videoModal');
-    const videoContainer = document.getElementById('videoContainer');
-    const closeModal = document.querySelector('.close-modal');
     
-    if (modal && videoContainer) {
-        window.openVideo = function(videoId) {
-            if (!videoId) return;
-            videoContainer.innerHTML = '';
-            const iframe = document.createElement('iframe');
-            iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
-            iframe.setAttribute('frameborder', '0');
-            iframe.setAttribute('allow', 'autoplay; encrypted-media');
-            iframe.setAttribute('allowfullscreen', '');
-            videoContainer.appendChild(iframe);
-            modal.style.display = 'flex';
-        };
-        
-        window.closeVideo = function() {
-            modal.style.display = 'none';
-            videoContainer.innerHTML = '';
-        };
-        
-        const videoThumbs = document.querySelectorAll('.video-thumb');
-        videoThumbs.forEach(thumb => {
-            thumb.addEventListener('click', () => {
-                const videoId = thumb.getAttribute('data-video');
-                window.openVideo(videoId);
-            });
-        });
-        
-        if (closeModal) closeModal.addEventListener('click', window.closeVideo);
-        window.addEventListener('click', (e) => { if (e.target === modal) window.closeVideo(); });
-        document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.style.display === 'flex') window.closeVideo(); });
-    }
-    
-    // ========== 8. ОГОНЬ НА КАРТОЧКЕ 1991 ==========
-    function addFireTo1991Card() {
-        const card1991 = document.querySelector('.year-card[data-year="1991"]');
-        if (card1991 && !card1991.querySelector('.fire-overlay')) {
-            const fireOverlay = document.createElement('div');
-            fireOverlay.className = 'fire-overlay';
-            card1991.appendChild(fireOverlay);
-            
-            setInterval(() => {
-                if (fireOverlay) {
-                    const intensity = 0.6 + Math.random() * 0.4;
-                    fireOverlay.style.opacity = intensity;
-                }
-            }, 150);
-        }
-    }
-    addFireTo1991Card();
-    
-    // ========== 9. СТАРОЕ РАДИО ==========
-    if (!document.querySelector('.radio-effect')) {
-        const radioEffect = document.createElement('div');
-        radioEffect.className = 'radio-effect';
-        radioEffect.innerHTML = '<span class="radio-dot"></span><span>Эфир: хроника распада</span>';
-        document.body.appendChild(radioEffect);
-        
-        radioEffect.addEventListener('click', () => {
-            const toast = document.createElement('div');
-            toast.textContent = '📻 "Говорит Москва... В эфире программа "Время"';
-            toast.style.position = 'fixed';
-            toast.style.bottom = '100px';
-            toast.style.left = '30px';
-            toast.style.background = 'rgba(0,0,0,0.7)';
-            toast.style.backdropFilter = 'blur(8px)';
-            toast.style.padding = '8px 16px';
-            toast.style.borderRadius = '20px';
-            toast.style.fontSize = '0.7rem';
-            toast.style.zIndex = '1002';
-            toast.style.borderLeft = '3px solid #aa3e3e';
-            toast.style.color = 'white';
-            document.body.appendChild(toast);
-            setTimeout(() => toast.remove(), 3000);
-        });
-    }
-    
-    // ========== 10. ЦИТАТЫ ДЛЯ КАРТОЧЕК ==========
+    // ========== 7. ЦИТАТЫ ДЛЯ КАРТОЧЕК ==========
     const quotes = {
         1985: '"Начало перемен, которых ждали" — из выступления Горбачева',
         1987: '"Гласность — это право знать правду"',
@@ -286,5 +213,5 @@ window.addEventListener('beforeunload', () => {
         }
     });
     
-    console.log('✅ Сайт полностью загружен, все эффекты активированы!');
+    console.log('Сайт полностью загружен, все эффекты активированы');
 });
