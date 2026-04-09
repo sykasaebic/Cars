@@ -190,28 +190,5 @@ window.addEventListener('beforeunload', () => {
         });
     });
     
-    
-    // ========== 7. ЦИТАТЫ ДЛЯ КАРТОЧЕК ==========
-    const quotes = {
-        1985: '"Начало перемен, которых ждали" — из выступления Горбачева',
-        1987: '"Гласность — это право знать правду"',
-        1989: '"Первый съезд народных депутатов открыл новую эпоху"',
-        1990: '"Отмена 6-й статьи — конец монополии КПСС"',
-        1991: '"Страна, в которой мы жили, перестала существовать" — Б. Ельцин',
-        1992: '"Шоковая терапия" — цена перехода к рынку',
-        1993: '"Конституционный кризис разделил страну"'
-    };
-    
-    const yearCards = document.querySelectorAll('.year-card');
-    yearCards.forEach(card => {
-        const year = card.getAttribute('data-year');
-        if (quotes[year] && !card.querySelector('.quote-tooltip')) {
-            const quoteDiv = document.createElement('div');
-            quoteDiv.className = 'quote-tooltip';
-            quoteDiv.textContent = quotes[year];
-            card.appendChild(quoteDiv);
-        }
-    });
-    
     console.log('Сайт полностью загружен, все эффекты активированы');
 });
