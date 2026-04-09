@@ -45,61 +45,66 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Swiper инициализирован');
     }
     
-// ========== 3. ИНИЦИАЛИЗАЦИЯ tsParticles (ДОЖДЬ) ==========
-let particlesInstance = null;
-
-function initRain() {
+// ========== 3. tsParticles ДОЖДЬ  ==========
+document.addEventListener('DOMContentLoaded', function() {
     const rainContainer = document.getElementById('rain-container');
     if (!rainContainer) {
-        console.error('Контейнер #rain-container не найден');
+        console.error(' Контейнер #rain-container не найден в main.js');
         return;
     }
+    
+    console.log(' main.js: пробуем запустить tsParticles дождь...');
     
     if (typeof tsParticles === 'undefined') {
-        console.error('Библиотека tsParticles не загружена');
+        console.error(' tsParticles не загружен! Проверьте подключение библиотеки.');
         return;
     }
     
-    console.log('Запуск ДОЖДЯ');
+    // Очищаем контейнер
+    rainContainer.innerHTML = '';
     
+    // Запускаем дождь
     tsParticles.load({
         id: "rain-container",
         options: {
+            fpsLimit: 60,
             particles: {
-                number: { 
+                number: {
                     value: 200,
-                    density: { enable: true, area: 1000 } 
-                },
-                color: { value: "#ff0000" }, // Голубоватый оттенок пока красный для проверки
-                shape: { 
-                    type: "line",
-                    options: {
-                        line: {
-                            length: 8,  // Длина капли
-                            width: 2    // Толщина
-                        }
+                    density: {
+                        enable: true,
+                        area: 800
                     }
                 },
-                opacity: { 
-                    value: 1, // 0.7
-                    random: true,
-                    animation: { enable: true, speed: 0.8, minimumValue: 0.3 }
+                color: {
+                    value: ["#88bbff", "#aaddff", "#6699cc"]
                 },
-                size: { 
-                    value: { min: 1, max: 4 }, //1 и 2 
-                    random: true 
+                shape: {
+                    type: "circle"
+                },
+                opacity: {
+                    value: 0.7,
+                    random: true,
+                    animation: {
+                        enable: true,
+                        speed: 0.5,
+                        minimumValue: 0.3
+                    }
+                },
+                size: {
+                    value: { min: 1, max: 3 },
+                    random: true
                 },
                 move: {
                     enable: true,
-                    speed: 12,  // Быстрее падает (капли)
+                    speed: 8,
                     direction: "bottom",
                     random: false,
                     straight: true,
-                    outModes: { default: "out" },
-                    trail: { enable: false }
-                },
-                wobble: { enable: false },  // Без покачиваний
-                tilt: { enable: false }
+                    outModes: {
+                        default: "out"
+                    }
+                }
             },
             interactivity: {
                 events: {
@@ -107,38 +112,20 @@ function initRain() {
                     onClick: { enable: false }
                 }
             },
-            background: { color: "transparent" },
-            fpsLimit: 60,
-            detectRetina: true
+            background: {
+                color: "transparent"
+            },
+            fullScreen: {
+                enable: false,
+                zIndex: 9999
+            }
         }
-    }).then(container => {
-        particlesInstance = container;
-        console.log('ДОЖДЬ запущен');
-    }).catch(error => {
-        console.error('Ошибка:', error);
+    }).then(() => {
+        console.log(' tsParticles дождь УСПЕШНО запущен!');
+    }).catch((error) => {
+        console.error(' Ошибка tsParticles:', error);
     });
-}
-
-initRain();
-
-window.addEventListener('beforeunload', () => {
-    if (particlesInstance && particlesInstance.destroy) {
-        particlesInstance.destroy();
-    }
 });
-    
-    // ========== 4. СЧЕТЧИК ДНЕЙ ==========
-    function updateDaysCounter() {
-        const collapseDate = new Date(1991, 11, 25);
-        const today = new Date();
-        const diffTime = Math.abs(today - collapseDate);
-        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-        const counterElement = document.getElementById('counterValue');
-        if (counterElement) {
-            counterElement.textContent = diffDays.toLocaleString();
-        }
-    }
-    updateDaysCounter();
     
     // ========== 5. GSAP АНИМАЦИИ ==========
     if (typeof gsap !== 'undefined') {
