@@ -46,20 +46,38 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // ========== 3. ИНИЦИАЛИЗАЦИЯ tsParticles (ДОЖДЬ) ==========
+let particlesInstance = null;
+
+function initRain() {
     const rainContainer = document.getElementById('rain-container');
-    if (rainContainer && typeof tsParticles !== 'undefined') {
-        tsParticles.load("rain-container", {
+    if (!rainContainer) {
+        console.error('Контейнер #rain-container не найден');
+        return;
+    }
+    
+    // Проверяем, загружена ли библиотека tsParticles
+    if (typeof tsParticles === 'undefined') {
+        console.error('Библиотека tsParticles не загружена');
+        return;
+    }
+    
+    console.log('Запуск tsParticles');
+    
+    
+    tsParticles.load({
+        id: "rain-container",
+        options: {
             particles: {
                 number: { 
-                    value: 250, 
+                    value: 150,  //  было 250
                     density: { enable: true, area: 800 } 
                 },
-                color: { value: "#ffffff" },
+                color: { value: ["#ffffff", "#e0e0e0", "#c0c0c0"] },
                 shape: { type: "circle" },
                 opacity: { 
-                    value: 0.5, 
+                    value: 0.6, 
                     random: true,
-                    animation: { enable: true, speed: 1, minimumValue: 0.2 }
+                    animation: { enable: true, speed: 0.5, minimumValue: 0.2 }
                 },
                 size: { 
                     value: { min: 1, max: 3 }, 
@@ -67,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 },
                 move: {
                     enable: true,
-                    speed: 6,
+                    speed: 8,
                     direction: "bottom",
                     random: false,
                     straight: true,
@@ -81,10 +99,27 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             },
             background: { color: "transparent" },
-            fpsLimit: 60
-        });
-        console.log('✅ tsParticles (дождь) инициализирован');
+            fpsLimit: 60,
+            detectRetina: true
+        }
+    }).then(container => {
+        particlesInstance = container;
+        console.log('tsParticles дождь успешно запущен');
+    }).catch(error => {
+        console.error('Ошибка запуска tsParticles:', error);
+    });
+}
+
+// Запускаем дождь
+initRain();
+
+// Очистка при уходе со страницы
+window.addEventListener('beforeunload', () => {
+    if (particlesInstance && particlesInstance.destroy) {
+        particlesInstance.destroy();
+        console.log('🌧️ tsParticles дождь остановлен');
     }
+});
     
     // ========== 4. СЧЕТЧИК ДНЕЙ ==========
     function updateDaysCounter() {
