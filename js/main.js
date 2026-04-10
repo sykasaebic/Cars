@@ -45,87 +45,49 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Swiper инициализирован');
     }
     
-// ========== 3. tsParticles ДОЖДЬ  ==========
-document.addEventListener('DOMContentLoaded', function() {
-    const rainContainer = document.getElementById('rain-container');
-    if (!rainContainer) {
-        console.error(' Контейнер #rain-container не найден в main.js');
-        return;
-    }
-    
-    console.log(' main.js: пробуем запустить tsParticles дождь...');
-    
-    if (typeof tsParticles === 'undefined') {
-        console.error(' tsParticles не загружен! Проверьте подключение библиотеки.');
-        return;
-    }
-    
-    // Очищаем контейнер
-    rainContainer.innerHTML = '';
-    
-    // Запускаем дождь
-    tsParticles.load({
-        id: "rain-container",
-        options: {
-            fpsLimit: 60,
-            particles: {
-                number: {
-                    value: 200,
-                    density: {
-                        enable: true,
-                        area: 800
-                    }
-                },
-                color: {
-                    value: ["#88bbff", "#aaddff", "#6699cc"]
-                },
-                shape: {
-                    type: "circle"
-                },
-                opacity: {
-                    value: 0.7,
-                    random: true,
-                    animation: {
-                        enable: true,
-                        speed: 0.5,
-                        minimumValue: 0.3
-                    }
-                },
-                size: {
-                    value: { min: 1, max: 3 },
-                    random: true
-                },
-                move: {
-                    enable: true,
-                    speed: 8,
-                    direction: "bottom",
-                    random: false,
-                    straight: true,
-                    outModes: {
-                        default: "out"
+// ========== tsParticles ДОЖДЬ (через изображение) ==========
+tsParticles.load({
+    id: "rain-container",
+    options: {
+        fpsLimit: 60,
+        particles: {
+            number: {
+                value: 120,
+                density: { enable: true, area: 800 }
+            },
+            color: { value: "#aaddff" },
+            shape: {
+                type: "image",
+                options: {
+                    image: {
+                        src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M5,0 C5,0 1,4 1,7 C1,9 2,10 5,10 C8,10 9,9 9,7 C9,4 5,0 5,0 Z' fill='%23aaddff' opacity='0.8'/%3E%3C/svg%3E",
+                        width: 8,
+                        height: 8
                     }
                 }
             },
-            interactivity: {
-                events: {
-                    onHover: { enable: false },
-                    onClick: { enable: false }
-                }
+            opacity: {
+                value: 0.8,
+                random: true,
+                animation: { enable: true, speed: 0.5, minimumValue: 0.4 }
             },
-            background: {
-                color: "transparent"
+            size: {
+                value: { min: 6, max: 10 },
+                random: true
             },
-            fullScreen: {
-                enable: false,
-                zIndex: 9999
+            move: {
+                enable: true,
+                speed: 10,
+                direction: "bottom",
+                random: false,
+                straight: true,
+                outModes: { default: "out" }
             }
-        }
-    }).then(() => {
-        console.log(' tsParticles дождь УСПЕШНО запущен!');
-    }).catch((error) => {
-        console.error(' Ошибка tsParticles:', error);
-    });
-});
+        },
+        background: { color: "transparent" },
+        fullScreen: { enable: false, zIndex: 9999 }
+    }
+}).then(() => console.log('Дождь из капель запущен'));
     
     // ========== 5. GSAP АНИМАЦИИ ==========
     if (typeof gsap !== 'undefined') {
