@@ -3,6 +3,20 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     
+    // ========== СЧЁТЧИК ДНЕЙ ==========
+function updateDaysCounter() {
+    const collapseDate = new Date(1991, 11, 25);
+    const today = new Date();
+    const diffTime = Math.abs(today - collapseDate);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    const counterElement = document.getElementById('counterValue');
+    if (counterElement) {
+        counterElement.textContent = diffDays.toLocaleString();
+        console.log('Счётчик обновлён:', diffDays);
+    }
+}
+updateDaysCounter(); // ← ВЫЗОВ!
+    
     // ========== 1. ИНИЦИАЛИЗАЦИЯ AOS (Анимация при скролле) ==========
     if (typeof AOS !== 'undefined') {
         AOS.init({
