@@ -66,7 +66,7 @@ tsParticles.load({
         fpsLimit: 60,
         particles: {
             number: {
-                value: 120,
+                value: 100,
                 density: { enable: true, area: 800 }
             },
             color: { value: "#aaddff" },
@@ -75,23 +75,23 @@ tsParticles.load({
                 options: {
                     image: {
                         src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M5,0 C5,0 1,4 1,7 C1,9 2,10 5,10 C8,10 9,9 9,7 C9,4 5,0 5,0 Z' fill='%23aaddff' opacity='0.8'/%3E%3C/svg%3E",
-                        width: 8,
-                        height: 8
+                        width: 3,
+                        height: 3
                     }
                 }
             },
             opacity: {
-                value: 0.8,
+                value: 0.3,
                 random: true,
                 animation: { enable: true, speed: 0.5, minimumValue: 0.4 }
             },
             size: {
-                value: { min: 6, max: 10 },
+                value: { min: 1, max: 4 },
                 random: true
             },
             move: {
                 enable: true,
-                speed: 10,
+                speed: 15,
                 direction: "bottom",
                 random: false,
                 straight: true,
