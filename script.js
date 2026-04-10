@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
         //return;
    // }
     
-   // console.log('🌧️ Запуск дождя...');
+   // console.log(' Запуск дождя...');
     
     // Очищаем старый интервал, если он был
   //  if (rainInterval) {
@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
     //    rainContainer.appendChild(newDrop);
   //  }, 150);
     
-  //  console.log(`✅ Создано ${numberOfDrops} капель`);
+  //  console.log(` Создано ${numberOfDrops} капель`);
 //}
 
 // Очистка при уходе со страницы
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
 //    if (rainInterval) {
  //       clearInterval(rainInterval);
   //      rainInterval = null;
-    //    console.log('🌧️ Дождь остановлен');
+    //    console.log(' Дождь остановлен');
  //   }
   //  const rainContainer = document.getElementById('rain');
   //  if (rainContainer) {
@@ -101,13 +101,13 @@ tsParticles.load({
                 options: {
                     image: {
                         src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M5,0 C5,0 1,4 1,7 C1,9 2,10 5,10 C8,10 9,9 9,7 C9,4 5,0 5,0 Z' fill='%23aaddff' opacity='0.8'/%3E%3C/svg%3E",
-                        width: 3,
-                        height: 3
+                        width: 4,
+                        height: 4
                     }
                 }
             },
             opacity: {
-                value: 0.3,
+                value: 0.2,
                 random: true,
                 animation: { enable: true, speed: 0.5, minimumValue: 0.4 }
             },
@@ -117,7 +117,7 @@ tsParticles.load({
             },
             move: {
                 enable: true,
-                speed: 15,
+                speed: 20,
                 direction: "bottom",
                 random: false,
                 straight: true,
