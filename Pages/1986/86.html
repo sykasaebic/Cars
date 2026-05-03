@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>1986 - Чернобыль: крах советского атомного мифа, XXVII съезд народных депутатов | Рапсад СССР</title>
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+    <link rel="stylesheet" href="86.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Courier Prime', 'Courier New', monospace;
+            background: #0a0a0a;
+            color: #fff;
+            overflow-x: hidden;
+            filter: grayscale(70%) contrast(125%) brightness(92%);
+        }
+
+        /* ========== секция контейнерочков :) ========== */
+        .main-part-1986 {
+            position: relative;
+            height: 100vh;
+            min-height: 600px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .great-bg-for-page-ussr {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 110%;
+            height: 110%;
+            background-image: url('../../images/T-80.webp');
+            background-size: cover;
+            background-position: center;
+            filter: grayscale(85%) brightness(35%);
+            z-index: 0;
+            transition: transform 0.1s ease-out;
+            will-change: transform;
+        }
+
+        .great-bg-for-page-ussr::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%);
+        }
+
+        .main-part-1986::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40%;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .main-part-content {
+            position: relative;
+            z-index: 10;
+            max-width: 800px;
+            padding: 20px;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .main-part-content h1 {
+            font-size: 5rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+            margin-bottom: 20px;
+            text-shadow: 0 0 30px rgba(0,0,0,0.8);
+            letter-spacing: 4px;
+            background: linear-gradient(135deg, #fff, #c9a87b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .main-part-content p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            letter-spacing: 1px;
+        }
+
+        .main-part-date {
+            font-size: 2.5rem;
+            letter-spacing: 4px;
+            color: #ffed85;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .scroll-down {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 12px 30px;
+            border: 2px solid rgba(201, 168, 123, 0.6);
+            border-radius: 50px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            backdrop-filter: blur(4px);
+            background: rgba(0,0,0,0.3);
+            font-weight: 500;
+            letter-spacing: 2px;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .scroll-down:hover {
+            background: rgba(201, 168, 123, 0.6);
+            border-color: rgba(201, 168, 123, 1);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(201, 168, 123, 0.3);
+            animation: none;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(8px); }
+        }
+
+        /* ========== ПАРАЛАКС-ТАЙМЛАЙН ========== */
+        .timeline-container {
+            position: relative;
+            background: linear-gradient(180deg, #0a0a0a 0%, #141414 50%, #0a0a0a 100%);
+            padding: 80px 0;
+        }
+
+        .timeline-item {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 20px;
+            overflow: hidden;
+        }
+
+        .timeline-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 110%;
+            height: 110%;
+            background-size: cover;
+            background-position: center;
+            filter: grayscale(90%) blur(4px);
+            opacity: 0.2;
+            z-index: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .timeline-item:hover .timeline-bg {
+            opacity: 0.3;
+        }
+
+        .timeline-card {
+            position: relative;
+            z-index: 10;
+            max-width: 800px;
+            width: 90%;
+            background: rgba(138, 133, 133, 0.103);
+            backdrop-filter: blur(16px);
+            border-radius: 32px;
+            padding: 50px;
+            border: 1px solid rgba(230, 158, 59, 0.3);
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            box-shadow: 0 10px 50px rgba(1, 207, 243, 0.952), 0 10px 300px rgb(238, 3, 207);;
+        }
+
+        .timeline-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(201, 168, 123, 0.7);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+        }
+
+        .Events-date {
+            font-size: 5.5rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+            background: linear-gradient(135deg, #fff, #c9a87b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+            letter-spacing: 2px;
+            line-height: 1.1;
+            text-shadow: 0 0 20px rgba(201, 168, 123, 0.3);
+        }
+
+        .Events-date::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 0;
+            width: 70px;
+            height: 3px;
+            background: linear-gradient(90deg, #c9a87b, transparent);
+            border-radius: 3px;
+        }
+
+        .timeline-title {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+            margin-top: 25px;
+            color: #c9a87b;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.9;
+        }
+
+        .date-card-description {
+            font-size: 1.4rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .date-quote { 
+            font-style: italic;
+            padding: 20px;
+            border-left: 3px solid #c9a87b;
+            background: rgba(201,168,123,0.1);
+            margin-top: 20px;
+            font-size: 1.4rem;
+            color: rgba(255,255,255,0.8);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-card:hover .date-quote {
+            background: rgba(201,168,123,0.2);
+            border-left-width: 4px;
+        }
+
+        /* главная кнопка  */
+        .back-home {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            z-index: 100;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(201, 168, 123, 0.5);
+            border-radius: 40px;
+            padding: 5px 15px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-home::before {
+            content: '↫';
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .back-home:hover {
+            background: rgba(201, 168, 123, 0.7);
+            border-color: rgba(201, 168, 123, 1);
+            transform: translateX(-5px);
+            box-shadow: 0 5px 20px rgba(201, 168, 123, 0.4);
+        }
+
+        .back-home:hover::before {
+            transform: translateX(-3px);
+        }
+
+        /* настройка кнопочек навигации */
+        .year-navigation {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1002;
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-year-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(201, 168, 123, 0.5);
+            border-radius: 40px;
+            padding: 10px 24px;
+            color: white;
+            font-family: 'Inter', 'Courier Prime', monospace;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            cursor: pointer;
+        }
+
+        .nav-year-btn:hover {
+            background: rgba(201, 168, 123, 0.7);
+            border-color: rgba(201, 168, 123, 1);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(201, 168, 123, 0.4);
+            }
+
+        /* Отключённые кнопочки (крайние годы) */
+        .nav-year-btn.disabled,
+        .nav-year-btn:disabled {
+            opacity: 0.3;
+            pointer-events: none;
+            transform: none;
+            }
+
+        /* Адаптация под мобильные */
+        @media (max-width: 768px) {
+            .year-navigation {
+                bottom: 20px;
+                right: 20px;
+                gap: 8px;
+                }
+            .nav-year-btn {
+                padding: 6px 14px;
+                font-size: 0.7rem;
+                }
+            }
+        /* Описание, что это проект */
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: rgba(255,255,255,0.4);
+            font-size: 0.8rem;
+            background: linear-gradient(180deg, #0a0a0a, #050505);
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 768px) {
+            .main-part-content h1 { font-size: 2.5rem; }
+            .main-part-content p { font-size: 1rem; }
+            .main-part-date { font-size: 2.1rem; }
+            .Events-date { font-size: 3.5rem; }
+            .Events-date::after { width: 50px; bottom: -8px; }
+            .timeline-title { font-size: 1rem; margin-top: 20px; }
+            .timeline-desc { font-size: 0.95rem; }
+            .timeline-card { padding: 30px; }
+            .timeline-item { padding: 40px 20px; min-height: auto; }
+            .back-home { bottom: 20px; left: 20px; padding: 8px 16px; font-size: 0.8rem; }
+            .scroll-down { padding: 10px 24px; font-size: 0.9rem; }
+        }
+
+        @media (max-width: 480px) {
+            .main-part-content { font-size: 2rem; }
+            .Events-date { font-size: 2.8rem; }
+            .timeline-title { font-size: 0.9rem; letter-spacing: 1px; }
+        }
+    </style>
+</head>
+<body>
+    <section class="main-part-1986">
+        <div class="great-bg-for-page-ussr" id="greatbgforpageussr"></div>
+        <div class="main-part-content">
+            <div class="main-part-date">1986</div>
+            <h1>Чернобыль: крах советского атомного мифа, XXVII съезд народных депутатов</h1>
+            <a href="#timeline-start" class="scroll-down">↓ посмотреть события ↓</a>
+        </div>
+    </section>
+
+    <div class="timeline-container" id="timeline-start">
+        <div class="timeline-item" data-speed="0.2">
+            <div class="timeline-bg" style="background-image: url('../../images/T-80.webp');"></div>
+            <div class="timeline-card">
+                <div class="Events-date">25 февраля</div>
+                <div class="timeline-title">XXVII съезд КПСС</div>
+                <div class="date-card-description"> Горбачев объявляет курс на «перестройку» (от слова «перестроить» — изменить систему, не ломая её). </div>
+                <div class="fact-box">
+                    <span class="fact-label">Интересный факт:</span>
+                    <span class="fact-text">Из 5000 делегатов съезда 4500 были партийными чиновниками. Оппозиции нет. Всё решается аплодисментами.</span>
+                </div>
+                <div class="date-quote">«Мы не отступаем от социализма. Перестройка — это улучшение, а не слом. Но ждать больше нельзя» - цитата Горбачёва на съезде</div>
+            </div>
+        </div>
+
+        <div class="timeline-item" data-speed="0.25">
+            <div class="timeline-bg" style="background-image: url('../../images/T-80.webp');"></div>
+            <div class="timeline-card">
+                <div class="Events-date">26 апреля, 1:23</div>
+                <div class="timeline-title">катастрофа на ЧАЭС</div>
+                <div class="date-card-description"> Взрыв 4-го энергоблока Чернобыльской АЭС.</div>
+                <div class="fact-box">
+                    <span class="fact-label">Интересные факты:</span>
+                    <span class="fact-text">Мощность выброса: 50 миллионов кюри (в 30 раз больше бомбы в Хиросиме). </span>
+                </div>
+                <div class="fact-box">
+                    <span class="fact-text">Ликвидаторы: 600–800 тысяч человек. Средняя доза — 25 бэр (норма мирного времени — 5 бэр). </span>
+                </div>
+                <div class="date-quote">«Чернобыль — это конец советского оптимизма. Никто больше не верил, что Кремль защитит» - Гобачёв, 1992год</div>
+            </div>
+        </div>
+
+        <div class="timeline-item" data-speed="0.3">
+            <div class="timeline-bg" style="background-image: url('../../images/T-80.webp');"></div>
+            <div class="timeline-card">
+                <div class="Events-date">27 апреля </div>
+                <div class="timeline-title">Эвакуация Припяти</div>
+                <div class="date-card-description">Эвакуация Припяти (47 500 жителей). Им сказали: «Вернетесь через три дня». Город пуст до сих пор.</div>
+            </div>
+        </div>
+
+        <div class="timeline-item" data-speed="0.3">
+            <div class="timeline-bg" style="background-image: url('../../images/T-80.webp');"></div>
+            <div class="timeline-card">
+                <div class="Events-date">14 мая</div>
+                <div class="timeline-title">Выступление Горбачёва</div>
+                <div class="date-card-description">Горбачев впервые выступает по телевидению о катастрофе. Прошло 18 дней.</div>
+                <div class="date-quote">Цитата (Михаил Горбачев, интервью 1992 года): «Чернобыль стал для меня, да и для всей системы, шоком. Мы поняли, что наша техника смертельно опасна, а управление — вранье. Это был конец советского оптимизма. Никто больше не верил, что Кремль может защитить» </div>
+                <div class="date-quote">Свидетельство (Владимир Шевченко, фотограф-ликвидатор): «Нам говорили: "Вы поработаете две минуты — хватит на всю жизнь". Партийное начальство скрывало дозиметры. Люди работали без защиты. Мой друг умер через месяц» </div>
+            </div>
+        </div>
+
+        <div class="timeline-item" data-speed="0.35">
+            <div class="timeline-bg" style="background-image: url('../../images/T-80.webp');"></div>
+            <div class="timeline-card">
+                <div class="Events-date">Октябрь</div>
+                <div class="timeline-title">Встреча Горбачева и Рейгана в Рейкьявике.</div>
+                <div class="date-card-description">Почти договорились о полной ликвидации ядерного оружия к 1996 году. Не подписали из-за противоракетной обороны (СОИ).</div>
+                <div class="date-quote">(Рейган после разрыва переговоров): «Мы были на грани уничтожения всего ядерного оружия. И сорвали из-за технологического спора. Это трагедия» </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Студенческий проект. Историческая хроника распада СССР 1985–1993.</p>
+    </footer>
+
+    <a href="../../main.html" class="back-home">На главную</a>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    
+    <script>
+        AOS.init({ duration: 800, once: true });
+        gsap.registerPlugin(ScrollTrigger);
+        
+        // ПАРАЛЛАКС ДЛЯ ФОНА
+        const greatbgforpageussr = document.getElementById('greatbgforpageussr');
+        if (greatbgforpageussr) {
+            document.addEventListener('mousemove', (e) => {
+                const mouseX = e.clientX / window.innerWidth;
+                const mouseY = e.clientY / window.innerHeight;
+                const moveX = (mouseX - 0.5) * 20;
+                const moveY = (mouseY - 0.5) * 20;
+                greatbgforpageussr.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.05)`;
+            });
+        }
+        
+        // АНИМАЦИЯ КАРТОЧЕК
+        gsap.utils.toArray(".timeline-card").forEach((card, index) => {
+            gsap.fromTo(card, 
+                { opacity: 0, y: 80, filter: "blur(5px)" },
+                {
+                    opacity: 1, y: 0, filter: "blur(0px)",
+                    duration: 1, delay: index * 0.15,
+                    scrollTrigger: { trigger: card, start: "top 85%", end: "bottom 30%", toggleActions: "play none none reverse", once: false }
+                }
+            );
+        });
+        
+        // ПАРАЛЛАКС ДЛЯ ФОНОВ
+        gsap.utils.toArray(".timeline-bg").forEach(bg => {
+            gsap.to(bg, { y: 120, ease: "none", scrollTrigger: { trigger: bg.parentElement, start: "top bottom", end: "bottom top", scrub: 1.2 } });
+        });
+        
+        // ПЛАВНАЯ ПРОКРУТКА
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+        
+        // ЭФФЕКТ ПРИ НАВЕДЕНИИ НА КАРТОЧКИ
+        const cards = document.querySelectorAll('.timeline-card');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => gsap.to(card, { scale: 1.02, duration: 0.3, ease: "power2.out" }));
+            card.addEventListener('mouseleave', () => gsap.to(card, { scale: 1, duration: 0.3, ease: "power2.in" }));
+        });
+        
+        console.log('٩(◕‿◕｡)۶ ');
+    </script>
+<div class="year-navigation">
+    <a href="../1985/85.html" id="prevYearBtn" class="nav-year-btn">ПРЕДЫДУЩИЙ⛧ГОД</a>
+    <a href="../1987/87.html" id="nextYearBtn" class="nav-year-btn">СЛЕДУЮЩИЙ⛧ГОД</a>
+</div>
+</body>
+</html>
