@@ -1,4 +1,4 @@
-// ========== ГЛАВНЫЙ СКРИПТ САЙТА ==========
+
 // Подключает все библиотеки и инициализирует эффекты
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -59,49 +59,49 @@ updateDaysCounter(); // ← ВЫЗОВ!
         console.log('Swiper инициализирован');
     }
     
-// ========== tsParticles ДОЖДЬ (через изображение) ==========
-tsParticles.load({
-    id: "rain-container",
-    options: {
-        fpsLimit: 60,
-        particles: {
-            number: {
-                value: 100,
-                density: { enable: true, area: 800 }
-            },
-            color: { value: "#aaddff" },
-            shape: {
-                type: "image",
-                options: {
-                    image: {
-                        src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M5,0 C5,0 1,4 1,7 C1,9 2,10 5,10 C8,10 9,9 9,7 C9,4 5,0 5,0 Z' fill='%23aaddff' opacity='0.8'/%3E%3C/svg%3E",
-                        width: 3,
-                        height: 3
-                    }
-                }
-            },
-            opacity: {
-                value: 0.3,
-                random: true,
-                animation: { enable: true, speed: 0.5, minimumValue: 0.4 }
-            },
-            size: {
-                value: { min: 1, max: 4 },
-                random: true
-            },
-            move: {
-                enable: true,
-                speed: 15,
-                direction: "bottom",
-                random: false,
-                straight: true,
-                outModes: { default: "out" }
-            }
-        },
-        background: { color: "transparent" },
-        fullScreen: { enable: false, zIndex: 9999 }
-    }
-}).then(() => console.log('Дождь из капель запущен'));
+// ========== tsParticles ДОЖДЬ (через изображение)
+//tsParticles.load({
+//    id: "rain-container",
+//    options: {
+//        fpsLimit: 60,
+//        particles: {
+//            number: {
+//                value: 100,
+//                density: { enable: true, area: 800 }
+//            },
+//            color: { value: "#aaddff" },
+//            shape: {
+//                type: "image",
+//                options: {
+//                    image: {
+//                        src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M5,0 C5,0 1,4 1,7 C1,9 2,10 5,10 C8,10 9,9 9,7 C9,4 5,0 5,0 Z' fill='%23aaddff' opacity='0.8'/%3E%3C/svg%3E",
+//                        width: 3,
+//                        height: 3
+//                    }
+//                }
+//            },
+//            opacity: {
+//                value: 0.3,
+//                random: true,
+//                animation: { enable: true, speed: 0.5, minimumValue: 0.4 }
+//            },
+//            size: {
+//                value: { min: 1, max: 4 },
+//                random: true
+//            },
+//            move: {
+//                enable: true,
+//                speed: 15,
+//                direction: "bottom",
+//                random: false,
+//                straight: true,
+//               outModes: { default: "out" }
+//            }
+//        },
+//        background: { color: "transparent" },
+//        fullScreen: { enable: false, zIndex: 9999 }
+//    }
+//}).then(() => console.log('Дождь из капель запущен'));
     
     // ========== 5. GSAP АНИМАЦИИ ==========
     if (typeof gsap !== 'undefined') {
@@ -153,5 +153,5 @@ tsParticles.load({
         });
     });
     
-    console.log('Сайт полностью загружен, все эффекты активированы');
+    console.log('( ´ ▿ ` )');
 });
