@@ -52,6 +52,4 @@ document.addEventListener('DOMContentLoaded', function() {
             item.style.transform = 'translateY(0)';
         }, 400 + index * 150);
     });
-    
-    console.log('✅ Страница 1992 загружена');
 });
