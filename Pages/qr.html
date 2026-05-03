@@ -1,1 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Наш Telegram‑бот</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            background: #0a0a0a;
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        /*/* Красный QR-код */
+        .qr {
+            width: 250px;
+            height: 250px;
+            background: #030000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 1rem;
+            text-transform: uppercase;
+            margin: 0 auto;
+            border-radius: 16px;
+            box-shadow: 0 0 1300px rgba(224, 5, 5, 0.5);
+        }
+
+        /* пустышка с фоном */
+        .qr img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            border-radius: 16px;
+        }
+
+        .caption {
+            margin-top: 30px;
+            color: #ccc;
+            font-size: 1.7rem;
+            letter-spacing: 1px;
+            font-family: monospace;
+        }
+
+        .caption a {
+            color: #ff2a2a;
+            text-decoration: none;
+            border-bottom: 1px dashed #ff2a2a;
+        }
+
+        .caption a:hover {
+            color: white;
+        }
+
+        /* Кнопка назад */
+        .back-link {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,42,42,0.3);
+            border-radius: 40px;
+            padding: 8px 20px;
+            color: #ff2a2a;
+            text-decoration: none;
+            font-family: monospace;
+            font-size: 0.8rem;
+            transition: 0.2s;
+        }
+
+        .back-link:hover {
+            background: #ff2a2a;
+            color: black;
+            border-color: #ff2a2a;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="qr">
+        <div class="qr">
+    <img src="../images/tg-bot-qr.webp" alt="QR-код Telegram-бота">
+</div>
+    </div>
+    <div class="caption">
+        или используй в поиске tg:  <a href="#">@takesomeiqbot</a>
+    </div>
+</div>
+
+<a href="../main.html" class="back-link">← НА ГЛАВНУЮ</a>
+
+</body>
+</html>
