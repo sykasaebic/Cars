@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>1985 — Начало перестройки | Распад СССР</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <title>1991 - Путч, Беловежье и смерть Союза | Рапсад СССР</title>
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+    <link rel="stylesheet" href="91.css">
     <style>
         * {
             margin: 0;
@@ -19,15 +20,15 @@
         }
 
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Courier Prime', 'Courier New', monospace;
             background: #0a0a0a;
             color: #fff;
             overflow-x: hidden;
             filter: grayscale(70%) contrast(125%) brightness(92%);
         }
 
-        /* ========== ГЕРОЙ-СЕКЦИЯ ========== */
-        .hero-tank {
+        /* ========== секция контейнерочков :) ========== */
+        .main-part-1991 {
             position: relative;
             height: 100vh;
             min-height: 600px;
@@ -38,13 +39,13 @@
             text-align: center;
         }
 
-        .tank-bg {
+        .great-bg-for-page-ussr {
             position: absolute;
             top: 0;
             left: 0;
             width: 110%;
             height: 110%;
-            background-image: url('../../images/1985-bg.jpg');
+            background-image: url('../../images/T-80.webp');
             background-size: cover;
             background-position: center;
             filter: grayscale(85%) brightness(35%);
@@ -53,7 +54,7 @@
             will-change: transform;
         }
 
-        .tank-bg::after {
+        .great-bg-for-page-ussr::after {
             content: '';
             position: absolute;
             top: 0;
@@ -63,7 +64,7 @@
             background: radial-gradient(ellipse at center, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%);
         }
 
-        .hero-tank::before {
+        .main-part-1991::before {
             content: '';
             position: absolute;
             bottom: 0;
@@ -75,7 +76,7 @@
             z-index: 5;
         }
 
-        .hero-content {
+        .main-part-content {
             position: relative;
             z-index: 10;
             max-width: 800px;
@@ -88,7 +89,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .hero-content h1 {
+        .main-part-content h1 {
             font-size: 5rem;
             font-family: 'Playfair Display', serif;
             font-weight: 900;
@@ -101,17 +102,17 @@
             color: transparent;
         }
 
-        .hero-content p {
+        .main-part-content p {
             font-size: 1.3rem;
             margin-bottom: 30px;
             opacity: 0.9;
             letter-spacing: 1px;
         }
 
-        .hero-date {
-            font-size: 1rem;
+        .main-part-date {
+            font-size: 2.5rem;
             letter-spacing: 4px;
-            color: #c9a87b;
+            color: #ffed85;
             margin-bottom: 20px;
             text-transform: uppercase;
         }
@@ -185,15 +186,15 @@
             z-index: 10;
             max-width: 800px;
             width: 90%;
-            background: rgba(0, 0, 0, 0.75);
+            background: rgba(138, 133, 133, 0.103);
             backdrop-filter: blur(16px);
             border-radius: 32px;
             padding: 50px;
-            border: 1px solid rgba(201, 168, 123, 0.3);
+            border: 1px solid rgba(230, 158, 59, 0.3);
             opacity: 0;
             transform: translateY(60px);
             transition: all 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            box-shadow: 0 10px 74px rgb(255, 0, 0), 0 10px 230px rgb(4, 0, 236);;
         }
 
         .timeline-card.visible {
@@ -207,7 +208,7 @@
             box-shadow: 0 30px 60px rgba(0,0,0,0.5);
         }
 
-        .timeline-date {
+        .Events-date {
             font-size: 5.5rem;
             font-family: 'Playfair Display', serif;
             font-weight: 900;
@@ -223,7 +224,7 @@
             text-shadow: 0 0 20px rgba(201, 168, 123, 0.3);
         }
 
-        .timeline-date::after {
+        .Events-date::after {
             content: '';
             position: absolute;
             bottom: -12px;
@@ -245,30 +246,30 @@
             opacity: 0.9;
         }
 
-        .timeline-desc {
-            font-size: 1.1rem;
+        .date-card-description {
+            font-size: 1.4rem;
             line-height: 1.8;
             margin-bottom: 20px;
             color: rgba(255,255,255,0.9);
         }
 
-        .timeline-quote {
+        .date-quote { 
             font-style: italic;
             padding: 20px;
             border-left: 3px solid #c9a87b;
             background: rgba(201,168,123,0.1);
             margin-top: 20px;
-            font-size: 0.95rem;
+            font-size: 1.4rem;
             color: rgba(255,255,255,0.8);
             transition: all 0.3s ease;
         }
 
-        .timeline-card:hover .timeline-quote {
+        .timeline-card:hover .date-quote {
             background: rgba(201,168,123,0.2);
             border-left-width: 4px;
         }
 
-        /* ========== КНОПКА НА ГЛАВНУЮ ========== */
+        /* главная кнопка */
         .back-home {
             position: fixed;
             bottom: 30px;
@@ -278,7 +279,7 @@
             backdrop-filter: blur(12px);
             border: 1px solid rgba(201, 168, 123, 0.5);
             border-radius: 40px;
-            padding: 12px 24px;
+            padding: 5px 15px;
             color: white;
             text-decoration: none;
             transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
@@ -291,7 +292,7 @@
         }
 
         .back-home::before {
-            content: '←';
+            content: '↫';
             font-size: 1.2rem;
             transition: transform 0.3s ease;
         }
@@ -307,6 +308,65 @@
             transform: translateX(-3px);
         }
 
+        /* настройка кнопочек навигации */
+        .year-navigation {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1002;
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-year-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(201, 168, 123, 0.5);
+            border-radius: 40px;
+            padding: 10px 24px;
+            color: white;
+            font-family: 'Inter', 'Courier Prime', monospace;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            cursor: pointer;
+        }
+
+        .nav-year-btn:hover {
+            background: rgba(201, 168, 123, 0.7);
+            border-color: rgba(201, 168, 123, 1);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(201, 168, 123, 0.4);
+            }
+
+        /* Отключённые кнопочки (крайние годы) */
+        .nav-year-btn.disabled,
+        .nav-year-btn:disabled {
+            opacity: 0.3;
+            pointer-events: none;
+            transform: none;
+            }
+
+        /* Адаптация под мобильные */
+        @media (max-width: 768px) {
+            .year-navigation {
+                bottom: 20px;
+                right: 20px;
+                gap: 8px;
+                }
+            .nav-year-btn {
+                padding: 6px 14px;
+                font-size: 0.7rem;
+                }
+            }
+        /* описание, что это проект */
         footer {
             text-align: center;
             padding: 40px;
@@ -316,12 +376,13 @@
             letter-spacing: 1px;
         }
 
+
         @media (max-width: 768px) {
-            .hero-content h1 { font-size: 2.5rem; }
-            .hero-content p { font-size: 1rem; }
-            .hero-date { font-size: 0.8rem; }
-            .timeline-date { font-size: 3.5rem; }
-            .timeline-date::after { width: 50px; bottom: -8px; }
+            .main-part-content h1 { font-size: 2.5rem; }
+            .main-part-content p { font-size: 1rem; }
+            .main-part-date { font-size: 2.1rem; }
+            .Events-date { font-size: 3.5rem; }
+            .Events-date::after { width: 50px; bottom: -8px; }
             .timeline-title { font-size: 1rem; margin-top: 20px; }
             .timeline-desc { font-size: 0.95rem; }
             .timeline-card { padding: 30px; }
@@ -331,64 +392,141 @@
         }
 
         @media (max-width: 480px) {
-            .hero-content h1 { font-size: 2rem; }
-            .timeline-date { font-size: 2.8rem; }
+            .main-part-content { font-size: 2rem; }
+            .Events-date { font-size: 2.8rem; }
             .timeline-title { font-size: 0.9rem; letter-spacing: 1px; }
         }
     </style>
 </head>
 <body>
-    <section class="hero-tank">
-        <div class="tank-bg" id="tankBg"></div>
-        <div class="hero-content">
-            <div class="hero-date">Март 1985</div>
-            <h1>Начало перестройки</h1>
-            <p>Хроника событий, изменивших ход истории</p>
-            <a href="#timeline-start" class="scroll-down">↓ ПОГРУЗИТЬСЯ В ХРОНИКУ ↓</a>
+    <section class="main-part-1991">
+        <div class="great-bg-for-page-ussr" id="greatbgforpageussr"></div>
+        <div class="main-part-content">
+            <div class="main-part-date">1991 год</div>
+            <h1>Путч, Беловежье и смерть Союза</h1>
+            <a href="#timeline-start" class="scroll-down">↓ посмотреть события ↓</a>
         </div>
     </section>
 
     <div class="timeline-container" id="timeline-start">
         <div class="timeline-item" data-speed="0.2">
-            <div class="timeline-bg" style="background-image: url('../../images/1985-bg.jpg');"></div>
+            <div class="timeline-bg" style="background-image: url('../../images/T-80.webp');"></div>
             <div class="timeline-card">
-                <div class="timeline-date">11 марта</div>
-                <div class="timeline-title">Избрание Горбачева</div>
-                <div class="timeline-desc">Пленум ЦК КПСС избирает Михаила Сергеевича Горбачева Генеральным секретарем ЦК КПСС. К власти приходит молодое и реформаторски настроенное руководство.</div>
-                <div class="timeline-quote">«Нам нужны перемены, нужна перестройка» — из выступления Горбачева</div>
+                <div class="Events-date">Январь</div>
+                <div class="timeline-title">Штурм телецентра</div>
+                <div class="date-card-description">События в Вильнюсе. 13 января советские войска штурмуют телецентр. Погибли 14 человек. Международный скандал. Горбачев говорит: «Я не отдавал приказ». Никто не верит.</div>
+            </div>
+        </div>
+
+    <div class="timeline-container" id="timeline-start">
+        <div class="timeline-item" data-speed="0.2">
+            <div class="timeline-bg" style="background-image: url('../../images/T-80.webp');"></div>
+            <div class="timeline-card">
+                <div class="Events-date">17 Марта</div>
+                <div class="timeline-title">Всесобзный референдум</div>
+                <div class="date-card-description"> Всесоюзный референдум о сохранении СССР. Итог: 76% граждан — «ЗА обновленный Союз». Но республики добавили свои вопросы. РСФСР спросила: «Нужен ли пост Президента России?» — да, 70%. Украина спросила: «Согласны ли быть в составе Союза на принципах независимости?» — да, 80%.</div>
             </div>
         </div>
 
         <div class="timeline-item" data-speed="0.25">
-            <div class="timeline-bg" style="background-image: url('../../images/1985-bg.jpg');"></div>
+            <div class="timeline-bg" style="background-image: url('../../images/T-80.webp');"></div>
             <div class="timeline-card">
-                <div class="timeline-date">23 апреля</div>
-                <div class="timeline-title">Апрельский пленум</div>
-                <div class="timeline-desc">Официальное провозглашение курса на перестройку и ускорение социально-экономического развития. Начало эпохи реформ, которая изменит страну.</div>
-                <div class="timeline-quote">«Ускорение — вот ключевая задача» — из постановления ЦК КПСС</div>
+                <div class="Events-date">23 Апреля</div>
+                <div class="timeline-title">Союзный договор</div>
+                <div class="date-card-description">Ново-Огарёвский процесс. Горбачев и 9 республик (без Прибалтики, Грузии, Армении) согласуют новый Союзный договор. Подписание назначено на 20 августа.</div>
+                <div class="date-quote">(Горбачев 23 апреля):«Мы нашли компромисс. СССР сохранится как обновленная федерация. Я верю, что договор будет подписан»</div>
             </div>
         </div>
 
         <div class="timeline-item" data-speed="0.3">
-            <div class="timeline-bg" style="background-image: url('../../images/1985-bg.jpg');"></div>
+            <div class="timeline-bg" style="background-image: url('../../images/T-80.webp');"></div>
             <div class="timeline-card">
-                <div class="timeline-date">7 мая</div>
-                <div class="timeline-title">Антиалкогольная кампания</div>
-                <div class="timeline-desc">Принятие постановления «О мерах по усилению борьбы против пьянства и алкоголизма». Начало масштабной кампании, которая затронула миллионы советских граждан.</div>
-                <div class="timeline-quote">«За здоровый образ жизни!» — лозунг кампании</div>
+                <div class="Events-date">12 июня</div>
+                <div class="timeline-title">Избрание Ельцина</div>
+                <div class="date-card-description"> Ельцин избран президентом РСФСР (57% голосов). Главный оппонент Горбачева теперь имеет всенародный мандат.</div>
             </div>
         </div>
 
-        <div class="timeline-item" data-speed="0.35">
-            <div class="timeline-bg" style="background-image: url('../../images/1985-bg.jpg');"></div>
+        <div class="timeline-item" data-speed="0.3">
+            <div class="timeline-bg" style="background-image: url('../../images/T-80.webp');"></div>
             <div class="timeline-card">
-                <div class="timeline-date">24 декабря</div>
-                <div class="timeline-title">Назначение Ельцина</div>
-                <div class="timeline-desc">Борис Николаевич Ельцин назначен первым секретарем Московского городского комитета КПСС. Начало политического восхождения будущего первого президента России.</div>
-                <div class="timeline-quote">«Перестройка должна дойти до каждого человека» — Б.Н. Ельцин</div>
+                <div class="Events-date">19–21 августа</div>
+                <div class="timeline-title">Августовский путч(ГКЧП)</div>
+                <div class="date-card-description">19 августа, 6:00 — в Москву введены танки. Объявлено о чрезвычайном положении. Горбачев «заблокирован» в Форосе (Крым). </div>
+                <div class="date-card-description">12:00 — Ельцин встает на танк № 110 у Белого дома. </div>
+                <div class="date-card-description">20 августа — приказ о штурме Белого дома («Операция "Гроза"»). Не выполнен. Войска отказываются стрелять.</div>
+                <div class="date-card-description">21 августа, 1:30 — колонна БТР врезается в баррикады. Трое защитников погибли (Комарь, Кричевский, Усов). Штурм провален. </div>
+                <div class="date-card-description">Вечер 21 августа — ГКЧП арестован. Пуго застрелился. </div>
+                <div class="date-quote">(Борис Ельцин, 19 августа, на танке): *«Мы заявляем, что так называемый комитет... является незаконным. Войска немедленно выводятся из Москвы!» </div>
             </div>
         </div>
-    </div>
+
+        <div class="timeline-item" data-speed="0.3">
+            <div class="timeline-bg" style="background-image: url('../../images/T-80.webp');"></div>
+            <div class="timeline-card">
+                <div class="Events-date">24 августа</div>
+                <div class="timeline-title">Принятие независимостей</div>
+                <div class="date-card-description"> Украина принимает Акт о независимости. 30 августа — Азербайджан. 31 августа — Узбекистан и Киргизия.</div>
+                <div class="date-quote">(Леонид Кравчук, президент Украины, 24 августа): «Украина становится независимым государством. Референдум подтвердит это» (референдум 1 декабря даст 90,3% «за»).</div>
+            </div>
+        </div>
+
+        <div class="timeline-item" data-speed="0.3">
+            <div class="timeline-bg" style="background-image: url('../../images/T-80.webp');"></div>
+            <div class="timeline-card">
+                <div class="Events-date">6 сентября</div>
+                <div class="timeline-title">Независимость Чечни</div>
+                <div class="date-card-description">Чечня (Джохар Дудаев) провозглашает независимость от РСФСР. Ельцин не реагирует — готовится война.</div>
+            </div>
+        </div>
+
+        <div class="timeline-item" data-speed="0.3">
+            <div class="timeline-bg" style="background-image: url('../../images/T-80.webp');"></div>
+            <div class="timeline-card">
+                <div class="Events-date">Ноябрь</div>
+                <div class="timeline-title">ССГ без Украины</div>
+                <div class="date-card-description">Последняя попытка Горбачева спасти Союз. Он предлагает подписать Союзный договор «без Украины». Бессмысленно — Украина дает 90% голосов за выход.</div>
+            </div>
+        </div>
+
+        <div class="timeline-item" data-speed="0.3">
+            <div class="timeline-bg" style="background-image: url('../../images/T-80.webp');"></div>
+            <div class="timeline-card">
+                <div class="Events-date">8 декабря</div>
+                <div class="timeline-title">Беловежское соглашение</div>
+                <div class="date-card-description">Охотничий домик «Вискули». Ельцин, Кравчук, Шушкевич подписывают документ: «Союз ССР как субъект международного права и геополитическая реальность прекращает свое существование» </div>
+                <div class="date-quote">(Станислав Шушкевич, 2011 год): «Мы сидели и понимали: если не подпишем сейчас, начнется кровавая баня. Войска держали оружие. Гражданская война в ядерной стране — это конец планеты. Мы выпили коньяк, чтобы успокоиться. Ельцин сказал: "Ну что, братва, давайте закроем лавочку?" И мы закрыли» </div>
+            </div>
+        </div>
+
+        <div class="timeline-item" data-speed="0.3">
+            <div class="timeline-bg" style="background-image: url('../../images/T-80.webp');"></div>
+            <div class="timeline-card">
+                <div class="Events-date">21 Декабря</div>
+                <div class="timeline-title">Алма-Алтинская декларация</div>
+                <div class="date-card-description">Алма-Атинская декларация. 11 республик (все, кроме Прибалтики и Грузии) присоединяются к СНГ. СССР больше не существует.</div>
+            </div>
+        </div>
+
+        <div class="timeline-item" data-speed="0.3">
+            <div class="timeline-bg" style="background-image: url('../../images/T-80.webp');"></div>
+            <div class="timeline-card">
+                <div class="Events-date">25 декабря, 19:38</div>
+                <div class="timeline-title">Отставка Горбачёва</div>
+                <div class="date-card-description">Михаил Горбачев объявляет об отставке по телевидению.</div>
+                <div class="date-card-description">Над Кремлем спускают красный флаг СССР. Поднимают российский триколор.</div>
+                <div class="date-quote">(М.С.Горбачёв)«Я прекращаю свою деятельность на посту Президента СССР. Судьба страны решилась... Я сделал все, что мог» </div>
+            </div>
+        </div>
+
+        <div class="timeline-item" data-speed="0.3">
+            <div class="timeline-bg" style="background-image: url('../../images/T-80.webp');"></div>
+            <div class="timeline-card">
+                <div class="Events-date">26 декабря</div>
+                <div class="timeline-title">Формальное прекращенеие существования СССР</div>
+                <div class="date-card-description">Совет Республик Верховного Совета СССР принимает формальный документ о прекращении существования Союза.</div>
+            </div>
+        </div>
 
     <footer>
         <p>Студенческий проект. Историческая хроника распада СССР 1985–1993.</p>
@@ -404,15 +542,15 @@
         AOS.init({ duration: 800, once: true });
         gsap.registerPlugin(ScrollTrigger);
         
-        // ПАРАЛЛАКС ДЛЯ ФОНА
-        const tankBg = document.getElementById('tankBg');
-        if (tankBg) {
+        // ПАРАЛЛАКС ДЛЯ ФОНА ( этот блок сгенерил GPT)
+        const greatbgforpageussr = document.getElementById('greatbgforpageussr');
+        if (greatbgforpageussr) {
             document.addEventListener('mousemove', (e) => {
                 const mouseX = e.clientX / window.innerWidth;
                 const mouseY = e.clientY / window.innerHeight;
                 const moveX = (mouseX - 0.5) * 20;
                 const moveY = (mouseY - 0.5) * 20;
-                tankBg.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.05)`;
+                greatbgforpageussr.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.05)`;
             });
         }
         
@@ -449,7 +587,11 @@
             card.addEventListener('mouseleave', () => gsap.to(card, { scale: 1, duration: 0.3, ease: "power2.in" }));
         });
         
-        console.log('✅ Страница 1985 загружена (шаблон 1993-tank)');
+        console.log('(*^‿^*) ');
     </script>
+<div class="year-navigation">
+    <a href="../1990/90.html" id="prevYearBtn" class="nav-year-btn">ПРЕДЫДУЩИЙ⛧ГОД</a>
+    <a href="../1992/92.html" id="nextYearBtn" class="nav-year-btn">СЛЕДУЮЩИЙ⛧ГОД</a>
+</div>
 </body>
 </html>
