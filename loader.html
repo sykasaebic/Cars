@@ -50,7 +50,7 @@
             border-radius: 4px;
         }
 
-        /* ========== ЭФФЕКТ ЭЛТ-МОНИТОРА IBM ========== */
+        /* эффект IBM*/
         .crt::before {
             content: " ";
             display: block;
@@ -88,7 +88,7 @@
             100% { opacity: 0.1; }
         }
 
-        /* ========== СВЕЧЕНИЕ ЯНТАРНОГО ЭКРАНА ========== */
+        /* свечение монитора */
         .screen-glow {
             position: fixed;
             top: 0;
@@ -106,7 +106,7 @@
             50% { opacity: 0.7; }
         }
 
-        /* ========== ЗЕРНИСТОСТЬ (СТАРАЯ ЭЛЕКТРОНИКА) ========== */
+        /* зернистость*/
         .grain {
             position: fixed;
             top: 0;
@@ -126,7 +126,7 @@
             100% { transform: translate(1%, 0.5%); }
         }
 
-        /* ========== КОНТЕНТ ТЕРМИНАЛА ========== */
+        /* строчки */
         .terminal-content {
             position: relative;
             z-index: 5;
@@ -422,7 +422,7 @@
     </div>
 
     <script>
-        // ========== IBM-СТИЛЬ ТЕРМИНАЛ С ЯНТАРНЫМ СВЕЧЕНИЕМ ==========
+        // стиль IBM-янтарное свечение
         
         const consoleOutput = document.getElementById('consoleOutput');
         const commandInput = document.getElementById('commandInput');
@@ -477,7 +477,9 @@
             { text: "MS-DOS Version 5.00", delay: 1600, type: "output" },
             { text: "LOADING USSR.HST...", delay: 2000, type: "output" },
             { text: "1985.DAT [ПЕРЕСТРОЙКА] - OK", delay: 2600, type: "success" },
+            { text: "1986.DAT [ЧЕРНОБЫЛЬ] - OK", delay: 3200, type: "success" },
             { text: "1987.DAT [ГЛАСНОСТЬ] - OK", delay: 3200, type: "success" },
+            { text: "1988.DAT [КОНФЛИКТЫ] - OK", delay: 3200, type: "success" },
             { text: "1989.DAT [СЪЕЗД НАРОДНЫХ ДЕПУТАТОВ] - OK", delay: 3800, type: "success" },
             { text: "1990.DAT [ОТМЕНА 6-Й СТАТЬИ] - OK", delay: 4400, type: "success" },
             { text: "1991.DAT [АВГУСТОВСКИЙ ПУТЧ] - SECTOR ERROR", delay: 5000, type: "warning" },
@@ -641,7 +643,7 @@
             }
         }, 1500);
         
-        console.log('🖥️ IBM-стиль терминал активирован. Янтарный монохром, эмуляция PC DOS.');
+        console.log('ахахАХХАХАХахАХхахахАХхахахахаХАХХХАХАХАХ:)');
     </script>
 
 </body>
