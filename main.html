@@ -10,7 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
     
     <style>
-        /* ========== ДОПОЛНИТЕЛЬНЫЕ УЛУЧШЕНИЯ ========== */
+        /* улучшения для странички*/
         
         @keyframes counterPop {
             0% { transform: scale(1); }
@@ -147,7 +147,7 @@
             }
         }
         
-        /* КНОПКА МУЗЫКИ */
+        /* кнопка музычки */
         .music-control {
             position: fixed;
             bottom: 30px;
@@ -194,7 +194,7 @@
 <body>
     <div id="rain-container" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; pointer-events: none;"></div>
     <!-- ДОЖДЬ -->
-    <!-- <div class="rain" id="rain"></div> -->
+    <div class="rain" id="rain"></div>
     <svg style="position: absolute; width: 0; height: 0;" aria-hidden="true">
     <defs>
         <svg id="raindrop" viewBox="0 0 10 10" width="10" height="10" xmlns="http://www.w3.org/2000/svg">
@@ -225,49 +225,67 @@
                 <span class="counter-value" id="counterValue">0</span>
             </div>
         </div>
-        
+        <!--блочёк с карточками:))-->
         <div class="cards-container">
             <div class="cards-grid">
-                <a href="Pages/1985/cool.html" class="year-card" data-year="1985">
+                <a href="Pages/1985/85.html" class="year-card" data-year="1985">
                     <div class="card-content">
                         <span class="year">1985</span>
-                        <span class="event">Начало перестройки</span>
+                        <span class="event">Перестройка Горбачёва</span>
                     </div>
                 </a>
-                <a href="Pages/1987/peak.html" class="year-card" data-year="1987">
+                <a href="Pages/1986/86.html" class="year-card" data-year="1986">
+                    <div class="card-content">
+                        <span class="year">1986</span>
+                        <span class="event">XXVII съезд КПСС, Чернобыль</span>
+                    </div>
+                </a>
+                <a href="Pages/1987/87.html" class="year-card" data-year="1987">
                     <div class="card-content">
                         <span class="year">1987</span>
-                        <span class="event">Ускорение и гласность</span>
+                        <span class="event">Гласность</span>
+                    </div>
+                </a>
+                <a href="Pages/1988/88.html" class="year-card" data-year="1988">
+                    <div class="card-content">
+                        <span class="year">1988</span>
+                        <span class="event">Спитак и конфликты</span>
                     </div>
                 </a>
                 <a href="Pages/1989/89.html" class="year-card" data-year="1989">
                     <div class="card-content">
                         <span class="year">1989</span>
-                        <span class="event">Первый Съезд народных депутатов</span>
+                        <span class="event">Крушение Восточного блока</span>
                     </div>
                 </a>
                 <a href="Pages/1990/90.html" class="year-card" data-year="1990">
                     <div class="card-content">
                         <span class="year">1990</span>
-                        <span class="event">Отмена 6-й статьи</span>
+                        <span class="event">Ельцин против Горбачёва</span>
                     </div>
                 </a>
                 <a href="Pages/1991/91.html" class="year-card" data-year="1991">
                     <div class="card-content">
                         <span class="year">1991</span>
-                        <span class="event">Августовский путч<br>Распад СССР</span>
+                        <span class="event">Путч и распад СССР</span>
                     </div>
                 </a>
                 <a href="Pages/1992/92.html" class="year-card" data-year="1992">
                     <div class="card-content">
                         <span class="year">1992</span>
-                        <span class="event">"Шоковая терапия"</span>
+                        <span class="event">Шоковая терапия</span>
                     </div>
                 </a>
-                <a href="special/1993-tank.html" class="year-card" data-year="1993">
+                <a href="Pages/1993/93.html" class="year-card" data-year="1993">
                     <div class="card-content">
                         <span class="year">1993</span>
                         <span class="event">Конституционный кризис</span>
+                    </div>
+                </a>
+                <a href="Pages/qr.html" class="year-card" data-year="1992">
+                    <div class="card-content">
+                        <span class="year">2026</span>
+                        <span class="event">Наш Telegram‑бот</span>
                     </div>
                 </a>
             </div>
@@ -288,7 +306,7 @@
     <!-- было <script src="script.js"></script> -->
     
     <script>
-        // ========== ДОПОЛНИТЕЛЬНЫЕ УЛУЧШЕНИЯ ==========
+        // улучшения
         
         function animateCounter() {
             const counterElement = document.getElementById('counterValue');
@@ -362,9 +380,8 @@
         optimizeRain();
         fixScrollBoundaries();
         
-        console.log('✅ Главная страница загружена');
         
-        // ========== МУЗЫКА С ТИХИМ СТАРТОМ И КНОПКОЙ ==========
+        // музыка с тихим стартом
         let bgMusic = null;
         let isMusicActive = true;
         let fadeInterval = null;
@@ -372,7 +389,7 @@
         const musicControl = document.createElement('button');
         musicControl.id = 'musicControl';
         musicControl.className = 'music-control';
-        musicControl.innerHTML = '🎵';
+        musicControl.innerHTML = '⚝';
         document.body.appendChild(musicControl);
         
         function initMusic() {
@@ -398,7 +415,7 @@
             if (!bgMusic) return;
             
             let volume = bgMusic.volume();
-            const targetVolume = 0.15;
+            const targetVolume = 0.025;
             
             if (volume >= targetVolume) return;
             
@@ -443,13 +460,13 @@
             if (bgMusic.volume() > 0.05) {
                 // Выключаем (затихаем)
                 fadeOutMusic();
-                musicControl.innerHTML = '🔇';
+                musicControl.innerHTML = '🖤';
                 musicControl.style.background = 'rgba(0,0,0,0.6)';
             } else {
                 // Включаем (увеличиваем громкость)
                 // НЕ вызываем play() повторно!
                 fadeInMusic();
-                musicControl.innerHTML = '🎵';
+                musicControl.innerHTML = '⛧';
                 musicControl.style.background = 'rgba(170,62,62,0.7)';
                 isMusicActive = true;
             }
@@ -457,7 +474,7 @@
         
         function showMusicButton() {
             const btn = document.createElement('button');
-            btn.innerHTML = '🎵 ВКЛЮЧИТЬ МУЗЫКУ';
+            btn.innerHTML = 'Включить шансон, ака лабай радио товарищ';
             btn.style.cssText = `
                 position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%);
                 background: rgba(170,62,62,0.9); backdrop-filter: blur(12px);
@@ -469,7 +486,7 @@
                 if (bgMusic && !bgMusic.playing()) {
                     bgMusic.play();
                     fadeInMusic();
-                    musicControl.innerHTML = '🎵';
+                    musicControl.innerHTML = '⛧';
                     musicControl.style.background = 'rgba(170,62,62,0.7)';
                     btn.remove();
                 }
