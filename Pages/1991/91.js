@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
     
-    // ========== КРОВАВЫЙ 3D-ЭФФЕКТ ДЛЯ КАРТОЧКИ ==========
     const card = document.querySelector('.blood-card');
     if (card) {
         let mouseX = 0, mouseY = 0;
@@ -23,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
         animate3D();
     }
     
-    // ========== АККОРДЕОНЫ (ИСПРАВЛЕНЫ) ==========
+    // Аккордеоны
     const accordionHeaders = document.querySelectorAll('.accordion-header');
     
     accordionHeaders.forEach(header => {
@@ -52,32 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // ========== КАПЛИ КРОВИ ==========
-    function createBloodDrops() {
-        const container = document.getElementById('bloodDrops');
-        if (!container) return;
-        
-        const dropCount = 30;
-        
-        for (let i = 0; i < dropCount; i++) {
-            const drop = document.createElement('div');
-            drop.className = 'blood-drop';
-            const size = 4 + Math.random() * 15;
-            const left = Math.random() * 100;
-            const duration = 3 + Math.random() * 8;
-            const delay = Math.random() * 15;
-            
-            drop.style.width = `${size}px`;
-            drop.style.height = `${size * 1.5}px`;
-            drop.style.left = `${left}%`;
-            drop.style.animationDuration = `${duration}s`;
-            drop.style.animationDelay = `${delay}s`;
-            
-            container.appendChild(drop);
-        }
-    }
-    
-    // ========== ГЛИТЧ-ЭФФЕКТ ДЛЯ ЗАГОЛОВКА ==========
+    // крутой эффект для заголовОЧКА
     const title = document.querySelector('.blood-title');
     if (title) {
         setInterval(() => {
@@ -90,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 2000);
     }
     
-    // ========== АНИМАЦИЯ ПОЯВЛЕНИЯ ЭЛЕМЕНТОВ АККОРДЕОНА ==========
+    // Анимация появления аккордеона
     const accordionItems = document.querySelectorAll('.accordion-item');
     accordionItems.forEach((item, index) => {
         item.style.opacity = '0';
@@ -103,6 +77,4 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     createBloodDrops();
-    
-    console.log('🩸 1991 — Кровавая хроника загружена. Память павших...');
 });
