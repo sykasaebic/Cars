@@ -1,4 +1,3 @@
-
 // Подключает все библиотеки и инициализирует эффекты
 
 document.addEventListener('DOMContentLoaded', function() {
