@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>1985 — Начало перестройки | Распад СССР</title>
+    <title>1985 - Начало перестройки | Распад СССР</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
     <style>
@@ -27,7 +27,7 @@
         }
 
         /* ========== ГЕРОЙ-СЕКЦИЯ ========== */
-        .hero-tank {
+        .main-part-1985 {
             position: relative;
             height: 100vh;
             min-height: 600px;
@@ -38,13 +38,13 @@
             text-align: center;
         }
 
-        .tank-bg {
+        .great-bg-for-page-ussr {
             position: absolute;
             top: 0;
             left: 0;
             width: 110%;
             height: 110%;
-            background-image: url('../../images/1985-bg.jpg');
+            background-image: url('../../images/T-80.webp');
             background-size: cover;
             background-position: center;
             filter: grayscale(85%) brightness(35%);
@@ -53,17 +53,17 @@
             will-change: transform;
         }
 
-        .tank-bg::after {
+        .great-bg-for-page-ussr::after {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(ellipse at center, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%);
+            background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 100%);
         }
 
-        .hero-tank::before {
+        .main-part-1985::before {
             content: '';
             position: absolute;
             bottom: 0;
@@ -75,7 +75,7 @@
             z-index: 5;
         }
 
-        .hero-content {
+        .main-part-content {
             position: relative;
             z-index: 10;
             max-width: 800px;
@@ -88,7 +88,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .hero-content h1 {
+        .main-part-content h1 {
             font-size: 5rem;
             font-family: 'Playfair Display', serif;
             font-weight: 900;
@@ -101,14 +101,14 @@
             color: transparent;
         }
 
-        .hero-content p {
+        .main-part-content p {
             font-size: 1.3rem;
             margin-bottom: 30px;
             opacity: 0.9;
             letter-spacing: 1px;
         }
 
-        .hero-date {
+        .main-part-date {
             font-size: 1rem;
             letter-spacing: 4px;
             color: #c9a87b;
@@ -193,7 +193,7 @@
             opacity: 0;
             transform: translateY(60px);
             transition: all 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            box-shadow: 0 10px 60px rgba(23, 252, 2, 0.884), 0 10px 550px rgb(3, 183, 238);;
         }
 
         .timeline-card.visible {
@@ -268,7 +268,7 @@
             border-left-width: 4px;
         }
 
-        /* ========== КНОПКА НА ГЛАВНУЮ ========== */
+        /* главная кнопка*/
         .back-home {
             position: fixed;
             bottom: 30px;
@@ -291,7 +291,7 @@
         }
 
         .back-home::before {
-            content: '←';
+            content: '↫';
             font-size: 1.2rem;
             transition: transform 0.3s ease;
         }
@@ -306,7 +306,66 @@
         .back-home:hover::before {
             transform: translateX(-3px);
         }
+         
+        /* настройка кнопочек навигации */
+        .year-navigation {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1002;
+            display: flex;
+            gap: 15px;
+        }
 
+        .nav-year-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(201, 168, 123, 0.5);
+            border-radius: 40px;
+            padding: 5px 15px;
+            color: white;
+            font-family: 'Inter', 'Courier Prime', monospace;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            cursor: pointer;
+        }
+
+        .nav-year-btn:hover {
+            background: rgba(201, 168, 123, 0.7);
+            border-color: rgba(201, 168, 123, 1);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(201, 168, 123, 0.4);
+            }
+
+        /* Отключённые кнопочки (крайние годы) */
+        .nav-year-btn.disabled,
+        .nav-year-btn:disabled {
+            opacity: 0.3;
+            pointer-events: none;
+            transform: none;
+            }
+
+        /* Адаптация под мобильные */
+        @media (max-width: 768px) {
+            .year-navigation {
+                bottom: 20px;
+                right: 20px;
+                gap: 8px;
+                }
+            .nav-year-btn {
+                padding: 6px 14px;
+                font-size: 0.7rem;
+                }
+            }
+        /* Описание, что это проект */
         footer {
             text-align: center;
             padding: 40px;
@@ -317,9 +376,9 @@
         }
 
         @media (max-width: 768px) {
-            .hero-content h1 { font-size: 2.5rem; }
-            .hero-content p { font-size: 1rem; }
-            .hero-date { font-size: 0.8rem; }
+            .main-part-content h1 { font-size: 2.5rem; }
+            .main-part-content p { font-size: 1rem; }
+            .main-part-date { font-size: 0.8rem; }
             .timeline-date { font-size: 3.5rem; }
             .timeline-date::after { width: 50px; bottom: -8px; }
             .timeline-title { font-size: 1rem; margin-top: 20px; }
@@ -331,18 +390,18 @@
         }
 
         @media (max-width: 480px) {
-            .hero-content h1 { font-size: 2rem; }
+            .main-part-content h1 { font-size: 2rem; }
             .timeline-date { font-size: 2.8rem; }
             .timeline-title { font-size: 0.9rem; letter-spacing: 1px; }
         }
     </style>
 </head>
 <body>
-    <section class="hero-tank">
-        <div class="tank-bg" id="tankBg"></div>
-        <div class="hero-content">
-            <div class="hero-date">Март 1985</div>
-            <h1>Начало перестройки</h1>
+    <section class="main-part-1985">
+        <div class="great-bg-for-page-ussr" id="greatbgforpageussr"></div>
+        <div class="main-part-content">
+            <div class="main-part-date">1985</div>
+            <h1>Смена власти и иллюзия ускорения</h1>
             <p>Хроника событий, изменивших ход истории</p>
             <a href="#timeline-start" class="scroll-down">↓ ПОГРУЗИТЬСЯ В ХРОНИКУ ↓</a>
         </div>
@@ -350,7 +409,7 @@
 
     <div class="timeline-container" id="timeline-start">
         <div class="timeline-item" data-speed="0.2">
-            <div class="timeline-bg" style="background-image: url('../../images/1985-bg.jpg');"></div>
+            <div class="timeline-bg" style="background-image: url('../../images/T-80.webp');"></div>
             <div class="timeline-card">
                 <div class="timeline-date">11 марта</div>
                 <div class="timeline-title">Избрание Горбачева</div>
@@ -360,7 +419,7 @@
         </div>
 
         <div class="timeline-item" data-speed="0.25">
-            <div class="timeline-bg" style="background-image: url('../../images/1985-bg.jpg');"></div>
+            <div class="timeline-bg" style="background-image: url('../../images/T-80.webp');"></div>
             <div class="timeline-card">
                 <div class="timeline-date">23 апреля</div>
                 <div class="timeline-title">Апрельский пленум</div>
@@ -370,17 +429,31 @@
         </div>
 
         <div class="timeline-item" data-speed="0.3">
-            <div class="timeline-bg" style="background-image: url('../../images/1985-bg.jpg');"></div>
+            <div class="timeline-bg" style="background-image: url('../../images/T-80.webp');"></div>
             <div class="timeline-card">
                 <div class="timeline-date">7 мая</div>
                 <div class="timeline-title">Антиалкогольная кампания</div>
                 <div class="timeline-desc">Принятие постановления «О мерах по усилению борьбы против пьянства и алкоголизма». Начало масштабной кампании, которая затронула миллионы советских граждан.</div>
-                <div class="timeline-quote">«За здоровый образ жизни!» — лозунг кампании</div>
+                <div class="timeline-quote">Михаил Горбачев, 1985 год, на совещании): «Мы должны прекратить пьянство. Это враг номер один для нашей экономики и здоровья нации. Полстраны сидит синее»</div>
+                <div class="fact-box">
+                    <span class="fact-label">Интересный факт:</span>
+                    <span class="fact-text">За 1985–1987 годы потребление алкоголя на душу населения упало с 11 до 4 литров в год. Но выросло самогоноварение. Бюджет потерял 25 млрд рублей акцизов.</span>
+                </div>
             </div>
         </div>
 
         <div class="timeline-item" data-speed="0.35">
-            <div class="timeline-bg" style="background-image: url('../../images/1985-bg.jpg');"></div>
+            <div class="timeline-bg" style="background-image: url('../../images/T-80.webp');"></div>
+            <div class="timeline-card">
+                <div class="timeline-date">19–21 ноября </div>
+                <div class="timeline-title">Встреча Горбачёва и Рейгана</div>
+                <div class="timeline-desc">Женевская встреча Горбачева с президентом США Рональдом Рейганом. Договорились о возобновлении переговоров по ядерным вооружениям. Запад впервые увидел «нового советского человека» без брежневской тяжеловесности. </div>
+                <div class="timeline-quote">(Рейган о Горбачеве после встречи): «Он не похож на медведей из Кремля. С ним можно договариваться» </div>
+        </div>
+    </div>
+
+        <div class="timeline-item" data-speed="0.35">
+            <div class="timeline-bg" style="background-image: url('../../images/T-80.webp');"></div>
             <div class="timeline-card">
                 <div class="timeline-date">24 декабря</div>
                 <div class="timeline-title">Назначение Ельцина</div>
@@ -405,21 +478,21 @@
         gsap.registerPlugin(ScrollTrigger);
         
         // ПАРАЛЛАКС ДЛЯ ФОНА
-        const tankBg = document.getElementById('tankBg');
-        if (tankBg) {
+        const greatbgforpageussr = document.getElementById('greatbgforpageussr');
+        if (greatbgforpageussr) {
             document.addEventListener('mousemove', (e) => {
                 const mouseX = e.clientX / window.innerWidth;
                 const mouseY = e.clientY / window.innerHeight;
                 const moveX = (mouseX - 0.5) * 20;
                 const moveY = (mouseY - 0.5) * 20;
-                tankBg.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.05)`;
+                greatbgforpageussr.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.05)`;
             });
         }
         
         // АНИМАЦИЯ КАРТОЧЕК
         gsap.utils.toArray(".timeline-card").forEach((card, index) => {
             gsap.fromTo(card, 
-                { opacity: 0, y: 80, filter: "blur(5px)" },
+                { opacity: 0, y: 80, filter: "blur(20px)" },
                 {
                     opacity: 1, y: 0, filter: "blur(0px)",
                     duration: 1, delay: index * 0.15,
@@ -429,8 +502,8 @@
         });
         
         // ПАРАЛЛАКС ДЛЯ ФОНОВ
-        gsap.utils.toArray(".timeline-bg").forEach(bg => {
-            gsap.to(bg, { y: 120, ease: "none", scrollTrigger: { trigger: bg.parentElement, start: "top bottom", end: "bottom top", scrub: 1.2 } });
+        gsap.utils.toArray(".timeline-bg").forEach(Ussrgreatbg => {
+            gsap.to(Ussrgreatbg, { y: 120, ease: "none", scrollTrigger: { trigger: Ussrgreatbg.parentElement, start: "top bottom", end: "bottom top", scrub: 1.2 } });
         });
         
         // ПЛАВНАЯ ПРОКРУТКА
@@ -449,7 +522,11 @@
             card.addEventListener('mouseleave', () => gsap.to(card, { scale: 1, duration: 0.3, ease: "power2.in" }));
         });
         
-        console.log('✅ Страница 1985 загружена (шаблон 1993-tank)');
+        console.log('(* ^ ω ^)');
     </script>
+<div class="year-navigation">
+    <a href="../1986/86.html" id="nextYearBtn" class="nav-year-btn">СЛЕДУЮЩИЙ⛧ГОД</a>
+</div>
 </body>
 </html>
+
