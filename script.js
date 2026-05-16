@@ -1,272 +1,132 @@
-document.addEventListener('DOMContentLoaded', function() {
-    
-     // Дождь
-    // Конфигурация (легко менять)
-const CONFIG = {
-    maxDrops: 150,          // Лимит капель в DOM (с буфером, чтобы реже удалять)
-    creationInterval: 150,  // Интервал создания новых капель (мс)
-    mobileDropCount: 30,
-    desktopDropCount: 60,
-    mobileBreakpoint: 768,
-    minDuration: 0.5,
-    durationVariation: 1,   // + Math.random() * durationVariation
-    maxDelay: 10
-};
-
-let rainInterval = null;
-
-// Функция для создания одной капли (чтобы избежать дублирования кода)
-function createSingleDrop(initialDelay = true) {
-    const dropSizes = ['small', 'medium', 'large'];
-    
-    const drop = document.createElement('div');
-    drop.classList.add('drop');
-    
-    // Случайный размер
-    const sizeClass = dropSizes[Math.floor(Math.random() * dropSizes.length)];
-    drop.classList.add(sizeClass);
-    
-    // Случайная позиция
-    drop.style.left = `${Math.random() * 100}%`;
-    
-    // Случайные параметры анимации
-    drop.style.animationDelay = initialDelay ? `${Math.random() * CONFIG.maxDelay}s` : '0s';
-    drop.style.animationDuration = `${CONFIG.minDuration + Math.random() * CONFIG.durationVariation}s`;
-    
-    //  ОПТИМИЗАЦИЯ: Удаление капли после завершения анимации
-    drop.addEventListener('animationend', () => {
-        drop.remove();
-        // console.log('Капля удалена');
-    });
-    
-    return drop;
-}
-
-// Функция для очистки контейнера
-function clearRainContainer(container) {
-    // Быстрая очистка контейнера. Можно использовать container.innerHTML = '', но
-    // метод replaceChildren() считается более современным и безопасным.
-    if (container) {
-        container.replaceChildren();
+// дождь
+// старая версия была на tsParticles и выглядела красивее
+// но жрала проц на телефонах, пришлось переписать на дивах
+/*
+tsParticles.load({
+    id: "rain-container",
+    options: {
+        fpsLimit: 60,
+        particles: {
+            number: { value: 100, density: { enable: true, area: 800 } },
+            color: { value: "#aaddff" },
+            shape: { type: "image", options: { image: { src: "data:image/svg+xml,..." } } },
+            move: { enable: true, speed: 20, direction: "bottom", straight: true }
+        }
     }
-}
+});
+*/
 
-function createRain() {
-    const rainContainer = document.getElementById('rain');
-    if (!rainContainer) {
-        console.error('Контейнер #rain не найден');
+(function() {
+    var rain = document.getElementById('rain');
+    if (!rain) {
+        // на случай если контейнер не нашли (на страницах галереи например)
+        console.log('контейнер дождя не найден, пропускаем');
         return;
     }
     
-    console.log('Запуск дождя...');
+    var interval;
+    var max = 150; // подобрано методом тыка, если менять — дождь или исчезает или стена воды
+    var mobile = window.innerWidth < 768;
+    var count = mobile ? 30 : 60;
     
-    // Очищаем старый интервал
-    if (rainInterval) {
-        clearInterval(rainInterval);
-        rainInterval = null;
+    function drop(delay) {
+        var d = document.createElement('div');
+        d.className = 'drop ' + ['small','medium','large'][Math.floor(Math.random() * 3)];
+        d.style.left = Math.random() * 100 + '%';
+        d.style.animationDuration = (0.5 + Math.random()) + 's';
+        if (delay) d.style.animationDelay = Math.random() * 10 + 's';
+        d.onanimationend = function() { d.remove(); };
+        return d;
     }
     
-    // Очищаем контейнер от старых капель
-    clearRainContainer(rainContainer);
+    var frag = document.createDocumentFragment();
+    for (var i = 0; i < count; i++) frag.appendChild(drop(true));
+    rain.appendChild(frag);
     
-    const isMobile = window.innerWidth < CONFIG.mobileBreakpoint;
-    const numberOfDrops = isMobile ? CONFIG.mobileDropCount : CONFIG.desktopDropCount;
-    
-    //  ГЛАВНАЯ ОПТИМИЗАЦИЯ: Используем DocumentFragment
-    const fragment = document.createDocumentFragment();
-    for (let i = 0; i < numberOfDrops; i++) {
-        fragment.appendChild(createSingleDrop(true));
-    }
-    
-    // Вставляем все капли ОДНОЙ операцией, вызывая только один reflow
-    rainContainer.appendChild(fragment);
-    
-    // Интервал для добавления новых капель
-    rainInterval = setInterval(() => {
-        // Проверяем, существует ли еще контейнер в DOM
-        if (!rainContainer.isConnected) {
-            if (rainInterval) {
-                clearInterval(rainInterval);
-                rainInterval = null;
-            }
+    interval = setInterval(function() {
+        if (!rain.isConnected) {
+            clearInterval(interval);
             return;
         }
-        
-        // Ограничиваем количество капель.
-        // Эта проверка все еще нужна как страховка, но будет срабатывать реже,
-        // так как капли удаляются сами по 'animationend'.
-        while (rainContainer.children.length > CONFIG.maxDrops) {
-            const oldest = rainContainer.firstElementChild;
-            if (oldest) oldest.remove();
+        while (rain.children.length > max) {
+            rain.firstElementChild?.remove();
         }
-        
-        // Добавляем новую каплю без начальной задержки
-        const newDrop = createSingleDrop(false);
-        rainContainer.appendChild(newDrop);
-    }, CONFIG.creationInterval);
+        rain.appendChild(drop(false));
+    }, 150);
     
-    console.log(`Создано ${numberOfDrops} начальных капель`);
-}
+    window.addEventListener('beforeunload', function() {
+        clearInterval(interval);
+        rain.replaceChildren();
+    });
+    
+    console.log('дождь запущен, капель: ' + count);
+})();
 
-function stopRain() {
-    if (rainInterval) {
-        clearInterval(rainInterval);
-        rainInterval = null;
-        console.log('Дождь остановлен');
-    }
-    const rainContainer = document.getElementById('rain');
-    clearRainContainer(rainContainer);
-}
-
-// Запуск
-createRain();
-window.addEventListener('beforeunload', stopRain);
-    // Дождь через tsparticles
-//tsParticles.load({
-//    id: "rain-container",
-//    options: {
-//        fpsLimit: 60,
-//        particles: {
-//            number: {
-//                value: 100,
-//                density: { enable: true, area: 800 }
-//            },
-//            color: { value: "#aaddff" },
-//            shape: {
-//                type: "image",
-//                options: {
-//                    image: {
-//                        src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M5,0 C5,0 1,4 1,7 C1,9 2,10 5,10 C8,10 9,9 9,7 C9,4 5,0 5,0 Z' fill='%23aaddff' opacity='0.8'/%3E%3C/svg%3E",
-//                        width: 4,
-//                        height: 4
-//                    }
-//                }
-//            },
-//            opacity: {
-//                value: 0.2,
-//                random: true,
-//                animation: { enable: true, speed: 0.5, minimumValue: 0.4 }
-//            },
-//            size: {
-//                value: { min: 1, max: 4 },
-//                random: true
-//            },
-//            move: {
-//                enable: true,
-//                speed: 20,
-//                direction: "bottom",
-//                random: false,
-//                straight: true,
-//                outModes: { default: "out" }
-//            }
-//        },
-//        background: { color: "transparent" },
-//        fullScreen: { enable: false, zIndex: 9999 }
-//    }
-//}).then(() => console.log('Дождь из капель запущен'));
+// аккордеоны и карточки
+document.addEventListener('DOMContentLoaded', function() {
     
-    // Аккордеоны
-    const accordionHeaders = document.querySelectorAll('.accordion-header');
-    
-    accordionHeaders.forEach(header => {
-        header.addEventListener('click', function(e) {
+    // аккордеоны
+    document.querySelectorAll('.accordion-header').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
             e.preventDefault();
+            var item = btn.closest('.accordion-item');
+            if (!item) return;
+            var y = window.scrollY;
             
-            const parent = this.parentElement;
-            const scrollY = window.scrollY;
-            
-            document.querySelectorAll('.accordion-item').forEach(item => {
-                if (item !== parent && item.classList.contains('active')) {
-                    item.classList.remove('active');
-                }
+            document.querySelectorAll('.accordion-item.active').forEach(function(open) {
+                if (open !== item) open.classList.remove('active');
             });
+            item.classList.toggle('active');
             
-            parent.classList.toggle('active');
-            
-            setTimeout(() => {
-                if (window.scrollY !== scrollY) {
-                    window.scrollTo(0, scrollY);
-                }
-            }, 10);
+            requestAnimationFrame(function() {
+                if (window.scrollY !== y) window.scrollTo(0, y);
+            });
         });
     });
+
+    // анимация появления карточек
+    var style = document.createElement('style');
+    style.textContent = '@keyframes f{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}';
+    document.head.appendChild(style);
     
-    // ========== 3. ОГОНЬ НА КАРТОЧКЕ 1991 ==========
-   // function addFireTo1991Card() {
-       // const card1991 = document.querySelector('.year-card[data-year="1991"]');
-      //  if (card1991 && !card1991.querySelector('.fire-overlay')) {
-          //  const fireOverlay = document.createElement('div');
-          //  fireOverlay.className = 'fire-overlay';
-          //  card1991.appendChild(fireOverlay);
-            
-          //  setInterval(() => {
-               // if (fireOverlay) {
-                   // const intensity = 0.6 + Math.random() * 0.4;
-               //     fireOverlay.style.opacity = intensity;
-              //  }
-          //  }, 150);
-     //   }
- //   }
-  //  addFireTo1991Card();
-    
-    // ========== 4. ЦИТАТЫ (УБРАНЫ, Т.К. НЕЧИТАЕМЫ) ==========
-// Цитаты были удалены для улучшения читаемости интерфейса
-    // Счётчик дней
-    function updateDaysCounter() {
-        const collapseDate = new Date(1991, 11, 25);
-        const today = new Date();
-        const diffTime = Math.abs(today - collapseDate);
-        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-        const counterElement = document.getElementById('counterValue');
-        if (counterElement) counterElement.textContent = diffDays.toLocaleString();
-    }
-    updateDaysCounter();
-    
-    // Плавное появление карточек
-    const cards = document.querySelectorAll('.year-card');
-    cards.forEach((card, index) => {
-        if (!card.style.animation) {
-            card.style.opacity = '0';
-            card.style.animation = `fadeInUpCards 0.5s ease forwards ${index * 0.1}s`;
-        }
+    document.querySelectorAll('.year-card').forEach(function(card, i) {
+        card.style.opacity = '0';
+        card.style.animation = 'f .5s ease forwards ' + (i * 0.1) + 's';
     });
-    
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes fadeInUpCards {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .year-card {
-            opacity: 0;
-        }
-    `;
-    if (!document.querySelector('style[data-rain-style]')) {
-        style.setAttribute('data-rain-style', 'true');
-        document.head.appendChild(style);
-    }
-    
-    console.log('(◕‿◕) ');
 });
-let activeIntervals = [];
 
-function safeInterval(fn, time) {
-    const id = setInterval(fn, time);
-    activeIntervals.push(id);
-    return id;
-}
-
-// При уходе со страницы
-window.addEventListener('beforeunload', () => {
-    activeIntervals.forEach(clearInterval);
-    activeIntervals = [];
-});
-// Отключаем параллакс на телефонах
+// параллакс фона (только на десктопе, на телефонах отключаем)
 if (window.innerWidth > 768) {
-    const bg = document.querySelector('.great-bg-for-page-ussr');
+    var bg = document.querySelector('.great-bg-for-page-ussr');
+    // да, название класса странное, писал в 3 ночи
     if (bg) {
-        document.addEventListener('mousemove', (e) => {
-            // ... код движения фона
+        document.addEventListener('mousemove', function(e) {
+            var x = (e.clientX / window.innerWidth - 0.5) * 20;
+            var y = (e.clientY / window.innerHeight - 0.5) * 20;
+            bg.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
         });
     }
 }
+
+// закомментил, но удалять жалко — вдруг пригодится
+// ========== ОГОНЬ НА КАРТОЧКЕ 1991 ==========
+// функция добавляла эффект огня на карточку 1991 года
+// но тормозила на слабых ноутах, убрал
+//
+// function addFireToCard() {
+//     var card = document.querySelector('.year-card[data-year="1991"]');
+//     if (!card) return;
+//     var fire = document.createElement('div');
+//     fire.className = 'fire-overlay';
+//     card.appendChild(fire);
+//     setInterval(function() {
+//         fire.style.opacity = 0.6 + Math.random() * 0.4;
+//     }, 150);
+// }
+// addFireToCard();
+
+// запасной вариант музыки если howler отвалится
+// var audio = new Audio('sounds/Holl.mp3');
+// audio.loop = true;
+// audio.volume = 0.025;
+// audio.play();
