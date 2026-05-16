@@ -315,6 +315,11 @@
     
     <script>
         // улучшения
+        // Детекция слабого устройства
+        const isSlowDevice = navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4;
+        if (isSlowDevice) {
+            document.body.classList.add('slow-device');
+    }
         
         function animateCounter() {
             const counterElement = document.getElementById('counterValue');
@@ -353,6 +358,7 @@
         }
         
         function initParallaxBackground() {
+            if (window.innerWidth < 768) return;
             const bg = document.querySelector('.animated-bg');
             if (!bg) return;
             document.addEventListener('mousemove', (e) => {
