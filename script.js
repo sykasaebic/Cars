@@ -261,3 +261,12 @@ window.addEventListener('beforeunload', () => {
     activeIntervals.forEach(clearInterval);
     activeIntervals = [];
 });
+// Отключаем параллакс на телефонах
+if (window.innerWidth > 768) {
+    const bg = document.querySelector('.great-bg-for-page-ussr');
+    if (bg) {
+        document.addEventListener('mousemove', (e) => {
+            // ... код движения фона
+        });
+    }
+}
