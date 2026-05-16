@@ -36,7 +36,7 @@ function createSingleDrop(initialDelay = true) {
     //  ОПТИМИЗАЦИЯ: Удаление капли после завершения анимации
     drop.addEventListener('animationend', () => {
         drop.remove();
-        // console.log('Капля удалена'); // Можно включить для отладки
+        // console.log('Капля удалена');
     });
     
     return drop;
