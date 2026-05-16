@@ -356,7 +356,7 @@
             }
 
         /* Адаптация под мобильные */
-        @media (max-width: 768px) {
+        @media (max-width: 600px) {
             .year-navigation {
                 bottom: 20px;
                 right: 20px;
@@ -377,15 +377,15 @@
             letter-spacing: 1px;
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 600px) {
             .main-part-content h1 { font-size: 2.5rem; }
             .main-part-content p { font-size: 1rem; }
             .main-part-date { font-size: 0.8rem; }
-            .timeline-date { font-size: 3.5rem; }
+            .timeline-date { font-size: 2.2rem; }
             .timeline-date::after { width: 50px; bottom: -8px; }
             .timeline-title { font-size: 1rem; margin-top: 20px; }
-            .timeline-desc { font-size: 0.95rem; }
-            .timeline-card { padding: 30px; }
+            .timeline-desc { font-size: 0.85rem; }
+            .timeline-card { padding: 20px; }
             .timeline-item { padding: 40px 20px; min-height: auto; }
             .back-home { bottom: 20px; left: 20px; padding: 8px 16px; font-size: 0.8rem; }
             .scroll-down { padding: 10px 24px; font-size: 0.9rem; }
@@ -393,8 +393,23 @@
 
         @media (max-width: 480px) {
             .main-part-content h1 { font-size: 2rem; }
-            .timeline-date { font-size: 2.8rem; }
+            .timeline-date { font-size: 2rem; }
             .timeline-title { font-size: 0.9rem; letter-spacing: 1px; }
+        }
+        /* ещё оптимизация для телефонов*/
+        @media (max-width: 600px) {
+            .timeline-card {
+                padding: 20px !important;
+        }
+            .timeline-desc, .timeline-quote {
+            font-size: 0.85rem !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .timeline-date {
+            font-size: 2rem !important;
+            }
         }
     </style>
 </head>
