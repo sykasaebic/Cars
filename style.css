@@ -775,3 +775,9 @@ body {
         font-size: 0.55rem !important;
     }
 }
+    .slow-device .card-content,
+    .slow-device .counter,
+    .slow-device .music-control {
+    backdrop-filter: none !important;
+    background: rgba(0, 0, 0, 0.85) !important;
+}
