@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 
-/* фиксы скролла */
+/* скролл */
 html {
     overflow-y: scroll;
     overflow-x: hidden;
@@ -15,7 +15,6 @@ body {
     overflow-y: visible;
 }
 
-/* Убираем двойной скролл-бар — только один */
 ::-webkit-scrollbar {
     width: 7px;
 }
@@ -33,7 +32,7 @@ body {
     background: #030114;
 }
 
-/* Основные стили */
+/* основные стили */
 body {
     font-family: 'Inter', sans-serif;
     font-weight: 400;
@@ -56,7 +55,7 @@ h1, h2, h3, .glitch, .year, .counter-value {
     font-style: italic;
 }
 
-/* анимированный фон */
+/* фон */
 .animated-bg {
     position: fixed;
     top: 0;
@@ -111,7 +110,7 @@ h1, h2, h3, .glitch, .year, .counter-value {
     to { background-position: 200px 200px, 100px 100px; }
 }
 
-/* Дождь */
+/* дождь */
 .rain {
     position: fixed;
     top: 0;
@@ -171,7 +170,7 @@ h1, h2, h3, .glitch, .year, .counter-value {
     }
 }
 
-/* нуар-эффекты*/
+/* эффекты — не удалять, сломается firefox */
 .vignette {
     position: fixed;
     top: 0;
@@ -211,7 +210,6 @@ h1, h2, h3, .glitch, .year, .counter-value {
     100% { transform: translate(0, 0); }
 }
 
-/* крутой эффект vhs */
 .film-grain {
     position: fixed;
     top: 0;
@@ -237,7 +235,6 @@ h1, h2, h3, .glitch, .year, .counter-value {
     100% { opacity: 0.4; transform: translateY(0); }
 }
 
-/* крутые оверлеи */
 .cinema-overlay {
     position: fixed;
     top: 0;
@@ -267,7 +264,7 @@ h1, h2, h3, .glitch, .year, .counter-value {
     mix-blend-mode: screen;
 }
 
-/* главная страница */
+/* главная */
 .main-page {
     min-height: 100vh;
     display: flex;
@@ -365,7 +362,7 @@ h1, h2, h3, .glitch, .year, .counter-value {
     color: #c9a87b;
 }
 
-/* карты с датами */
+/* карточки */
 .cards-container {
     max-width: 1200px;
     width: 100%;
@@ -438,7 +435,7 @@ h1, h2, h3, .glitch, .year, .counter-value {
     z-index: 2;
 }
 
-/* свечение для 91 и 93 годов */
+/* красное свечение для 91 и 93 */
 .year-card[data-year="1991"],
 .year-card[data-year="1993"] {
     position: relative;
@@ -515,7 +512,7 @@ h1, h2, h3, .glitch, .year, .counter-value {
     }
 }
 
-/* паралакс переход */
+/* разделитель */
 .parallax-transition {
     position: relative;
     height: 150px;
@@ -554,7 +551,7 @@ h1, h2, h3, .glitch, .year, .counter-value {
     width: 200px;
 }
 
-/* надпись, что проект */
+/* футер */
 footer {
     text-align: center;
     padding: 40px;
@@ -564,84 +561,48 @@ footer {
     width: 100%;
 }
 
-/* (этот блок сгенерил GPT ) */
-@media (max-width: 768px) {
-    .glitch { font-size: 2.5rem; }
-    .subtitle { font-size: 1.2rem; }
-    .cards-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
-    .year-card { height: 220px; }
-    .year { font-size: 2.5rem; }
-    .counter-value { font-size: 1.5rem; }
-    .epigraph p { font-size: 1rem; }
-    .transition-text { font-size: 0.9rem; }
-    .parallax-transition { height: 100px; margin: 20px 0; }
-}
-
-@media (max-width: 480px) {
-    .glitch { font-size: 2rem; }
-    .subtitle { font-size: 1rem; }
-    .description { font-size: 0.9rem; }
-    .year-card { height: 180px; }
-    .year { font-size: 2rem; }
-    .event { font-size: 0.8rem; }
-}
-
-@media (min-width: 2560px) {
-    .cards-container { max-width: 1600px; }
-    .glitch { font-size: 8rem; }
-    .subtitle { font-size: 2.5rem; }
-    .description { font-size: 1.4rem; }
-    .cards-grid { gap: 50px; }
-    .year-card { height: 400px; }
-    .year { font-size: 4.5rem; }
-    .event { font-size: 1.3rem; }
-}
-/* крутая кнопка музыки */
+/* кнопка музыки — создаётся через js, стили нужны тут */
 .music-control {
-    background: rgba(0, 0, 0, 0.6) !important;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 1001;
+    background: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(12px);
-    border: 1px solid rgba(201, 168, 123, 0.4) !important;
-    transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1) !important;
+    border: 1px solid rgba(201, 168, 123, 0.4);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    transition: all 0.4s ease;
+}
+
+/* костыль для сафари */
+.music-control {
+    -webkit-backdrop-filter: blur(12px);
 }
 
 .music-control:hover {
-    transform: scale(1.1) rotate(-5deg) !important;
-    background: rgba(170, 62, 62, 0.7) !important;
-    border-color: rgba(201, 168, 123, 0.8) !important;
-    box-shadow: 0 0 20px rgba(170, 62, 62, 0.5) !important;
+    transform: scale(1.1) rotate(8deg);
+    background: rgba(170, 62, 62, 0.85);
+    border-color: rgba(201, 168, 123, 0.8);
+    box-shadow: 0 0 25px rgba(170, 62, 62, 0.5);
 }
 
-.music-icon {
-    font-size: 1.5rem;
-    transition: transform 0.3s ease;
+/* отступ для айфонов с чёлкой */
+@supports (padding: env(safe-area-inset-bottom)) {
+    .music-control {
+        bottom: calc(30px + env(safe-area-inset-bottom));
+        right: calc(30px + env(safe-area-inset-right));
+    }
 }
 
-.music-control:hover .music-icon {
-    transform: scale(1.1);
-}
-
-.main-page {
-    min-height: 100vh;
-    height: auto;
-    overflow: visible;
-}
-/* фикс скролла (общий) */
-/* Убираем скролл у всех элементов, кроме body */
-*:not(body) {
-    overflow: visible !important;
-}
-
-/* У body оставляем скролл */
-body {
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-}
-.page-container, .content-card, .year-header, .accordion {
-    transform: translateZ(0); /* Включаем аппаратное ускорение */
-    backface-visibility: hidden;
-    will-change: transform; /* Говорим браузеру: "готовься, будет движение" */
-}
-/* навигация */
+/* навигация по годам */
 .year-navigation {
     position: fixed;
     bottom: 30px;
@@ -674,110 +635,112 @@ body {
     transform: translateY(-2px);
 }
 
+/* ускорение для слабых устройств */
+.page-container, .content-card, .year-header, .accordion {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    will-change: transform;
+}
+
+/* фикс скролла */
+*:not(body) {
+    overflow: visible !important;
+}
+
+body {
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+}
+
+/* отключаем блюр на слабых устройствах */
+.slow-device .card-content,
+.slow-device .counter,
+.slow-device .music-control {
+    backdrop-filter: none !important;
+    background: rgba(0, 0, 0, 0.85) !important;
+}
+
+/* ========== МОБИЛКИ ========== */
 @media (max-width: 768px) {
+    .glitch { font-size: 2.5rem; }
+    .subtitle { font-size: 1.2rem; }
+    .description { font-size: 0.85rem; }
+    .cards-grid {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 20px;
+        padding: 10px;
+    }
+    .year-card { height: 220px; }
+    .year { font-size: 2.5rem; }
+    .event { font-size: 0.75rem; }
+    .counter-value { font-size: 1.5rem; }
+    .epigraph p { font-size: 1rem; }
+    .transition-text { font-size: 0.9rem; }
+    .parallax-transition { height: 100px; margin: 20px 0; }
+    
+    .music-control {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+        bottom: 20px;
+        right: 20px;
+    }
+    
     .year-navigation {
         bottom: 20px;
         right: 20px;
         gap: 8px;
     }
+    
     .nav-year-btn {
         padding: 5px 12px;
         font-size: 0.65rem;
     }
-}
-/* Для телефонов (ширина до 768px) */
-@media (max-width: 768px) {
-    /* Основные тексты */
-    body {
-        font-size: 14px;
-    }
     
-    /* Заголовки главной */
-    .glitch {
-        font-size: 2rem !important;
-    }
-    .subtitle {
-        font-size: 1rem !important;
-    }
-    .description {
-        font-size: 0.85rem !important;
-    }
-    
-    /* Счетчик */
-    .counter-value {
-        font-size: 1.3rem !important;
-    }
-    
-    /* Карточки годов на главной */
-    .cards-grid {
-        gap: 15px !important;
-        padding: 10px !important;
-    }
-    .year-card {
-        height: 180px !important;
-    }
-    .year {
-        font-size: 2rem !important;
-    }
-    .event {
-        font-size: 0.75rem !important;
-    }
-    
-    /* Кнопки навигации */
-    .year-navigation {
-        bottom: 15px !important;
-        right: 15px !important;
-        gap: 8px !important;
-    }
-    .nav-year-btn {
-        padding: 5px 12px !important;
-        font-size: 0.65rem !important;
-    }
-    
-    /* Кнопка "На главную" */
     .back-home, .back-link {
-        bottom: 15px !important;
-        left: 15px !important;
-        padding: 6px 14px !important;
-        font-size: 0.7rem !important;
+        bottom: 15px;
+        left: 15px;
+        padding: 6px 14px;
+        font-size: 0.7rem;
     }
     
-    /* Отступы для контейнера */
-    .page-container,
-    .container {
-        padding: 30px 15px 80px !important;
-        width: 95% !important;
+    .page-container, .container {
+        padding: 30px 15px 80px;
+        width: 95%;
     }
     
-    /* Терминал и его стили (если есть) */
     .terminal {
-        padding: 15px !important;
-        width: 95% !important;
+        padding: 15px;
+        width: 95%;
     }
+    
     .log-line {
-        font-size: 0.7rem !important;
+        font-size: 0.7rem;
     }
 }
 
-/* Для очень маленьких телефонов (до 480px) */
 @media (max-width: 480px) {
-    .glitch {
-        font-size: 1.5rem !important;
-    }
-    .year-card {
-        height: 150px !important;
-    }
-    .year {
-        font-size: 1.5rem !important;
-    }
+    .glitch { font-size: 2rem; }
+    .subtitle { font-size: 1rem; }
+    .description { font-size: 0.9rem; }
+    .year-card { height: 180px; }
+    .year { font-size: 2rem; }
+    .event { font-size: 0.8rem; }
+    .counter-value { font-size: 1.3rem; }
     .nav-year-btn {
-        padding: 4px 10px !important;
-        font-size: 0.55rem !important;
+        padding: 4px 10px;
+        font-size: 0.55rem;
     }
 }
-    .slow-device .card-content,
-    .slow-device .counter,
-    .slow-device .music-control {
-    backdrop-filter: none !important;
-    background: rgba(0, 0, 0, 0.85) !important;
+
+/* большие экраны */
+@media (min-width: 2560px) {
+    .cards-container { max-width: 1600px; }
+    .glitch { font-size: 8rem; }
+    .subtitle { font-size: 2.5rem; }
+    .description { font-size: 1.4rem; }
+    .cards-grid { gap: 50px; }
+    .year-card { height: 400px; }
+    .year { font-size: 4.5rem; }
+    .event { font-size: 1.3rem; }
 }
