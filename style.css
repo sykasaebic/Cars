@@ -685,3 +685,93 @@ body {
         font-size: 0.65rem;
     }
 }
+/* Для телефонов (ширина до 768px) */
+@media (max-width: 768px) {
+    /* Основные тексты */
+    body {
+        font-size: 14px;
+    }
+    
+    /* Заголовки главной */
+    .glitch {
+        font-size: 2rem !important;
+    }
+    .subtitle {
+        font-size: 1rem !important;
+    }
+    .description {
+        font-size: 0.85rem !important;
+    }
+    
+    /* Счетчик */
+    .counter-value {
+        font-size: 1.3rem !important;
+    }
+    
+    /* Карточки годов на главной */
+    .cards-grid {
+        gap: 15px !important;
+        padding: 10px !important;
+    }
+    .year-card {
+        height: 180px !important;
+    }
+    .year {
+        font-size: 2rem !important;
+    }
+    .event {
+        font-size: 0.75rem !important;
+    }
+    
+    /* Кнопки навигации */
+    .year-navigation {
+        bottom: 15px !important;
+        right: 15px !important;
+        gap: 8px !important;
+    }
+    .nav-year-btn {
+        padding: 5px 12px !important;
+        font-size: 0.65rem !important;
+    }
+    
+    /* Кнопка "На главную" */
+    .back-home, .back-link {
+        bottom: 15px !important;
+        left: 15px !important;
+        padding: 6px 14px !important;
+        font-size: 0.7rem !important;
+    }
+    
+    /* Отступы для контейнера */
+    .page-container,
+    .container {
+        padding: 30px 15px 80px !important;
+        width: 95% !important;
+    }
+    
+    /* Терминал и его стили (если есть) */
+    .terminal {
+        padding: 15px !important;
+        width: 95% !important;
+    }
+    .log-line {
+        font-size: 0.7rem !important;
+    }
+}
+
+/* Для очень маленьких телефонов (до 480px) */
+@media (max-width: 480px) {
+    .glitch {
+        font-size: 1.5rem !important;
+    }
+    .year-card {
+        height: 150px !important;
+    }
+    .year {
+        font-size: 1.5rem !important;
+    }
+    .nav-year-btn {
+        padding: 4px 10px !important;
+        font-size: 0.55rem !important;
+    }
+}
