@@ -1,45 +1,90 @@
 document.addEventListener('DOMContentLoaded', function() {
     
      // Дождь
-    let rainInterval = null; // Глобальная переменная для интервала
+    // Конфигурация (легко менять)
+const CONFIG = {
+    maxDrops: 150,          // Лимит капель в DOM (с буфером, чтобы реже удалять)
+    creationInterval: 150,  // Интервал создания новых капель (мс)
+    mobileDropCount: 30,
+    desktopDropCount: 60,
+    mobileBreakpoint: 768,
+    minDuration: 0.5,
+    durationVariation: 1,   // + Math.random() * durationVariation
+    maxDelay: 10
+};
+
+let rainInterval = null;
+
+// Функция для создания одной капли (чтобы избежать дублирования кода)
+function createSingleDrop(initialDelay = true) {
+    const dropSizes = ['small', 'medium', 'large'];
+    
+    const drop = document.createElement('div');
+    drop.classList.add('drop');
+    
+    // Случайный размер
+    const sizeClass = dropSizes[Math.floor(Math.random() * dropSizes.length)];
+    drop.classList.add(sizeClass);
+    
+    // Случайная позиция
+    drop.style.left = `${Math.random() * 100}%`;
+    
+    // Случайные параметры анимации
+    drop.style.animationDelay = initialDelay ? `${Math.random() * CONFIG.maxDelay}s` : '0s';
+    drop.style.animationDuration = `${CONFIG.minDuration + Math.random() * CONFIG.durationVariation}s`;
+    
+    //  ОПТИМИЗАЦИЯ: Удаление капли после завершения анимации
+    drop.addEventListener('animationend', () => {
+        drop.remove();
+        // console.log('Капля удалена'); // Можно включить для отладки
+    });
+    
+    return drop;
+}
+
+// Функция для очистки контейнера
+function clearRainContainer(container) {
+    // Быстрая очистка контейнера. Можно использовать container.innerHTML = '', но
+    // метод replaceChildren() считается более современным и безопасным.
+    if (container) {
+        container.replaceChildren();
+    }
+}
 
 function createRain() {
     const rainContainer = document.getElementById('rain');
     if (!rainContainer) {
-        console.error(' Контейнер #rain не найден');
+        console.error('Контейнер #rain не найден');
         return;
     }
     
-    console.log(' Запуск дождя');
+    console.log('Запуск дождя...');
     
-    // Очищаем старый интервал, если он был
+    // Очищаем старый интервал
     if (rainInterval) {
         clearInterval(rainInterval);
         rainInterval = null;
     }
     
     // Очищаем контейнер от старых капель
-    rainContainer.innerHTML = '';
+    clearRainContainer(rainContainer);
     
-    const numberOfDrops = window.innerWidth < 768 ? 60 : 120;
-    const dropSizes = ['small', 'medium', 'large'];
+    const isMobile = window.innerWidth < CONFIG.mobileBreakpoint;
+    const numberOfDrops = isMobile ? CONFIG.mobileDropCount : CONFIG.desktopDropCount;
     
-    // Создаём начальные капли
+    //  ГЛАВНАЯ ОПТИМИЗАЦИЯ: Используем DocumentFragment
+    const fragment = document.createDocumentFragment();
     for (let i = 0; i < numberOfDrops; i++) {
-       const drop = document.createElement('div');
-         drop.classList.add('drop');
-        const sizeClass = dropSizes[Math.floor(Math.random() * dropSizes.length)];
-        drop.classList.add(sizeClass);
-        drop.style.left = `${Math.random() * 100}%`;  // ← Исправлено: добавлены кавычки
-        drop.style.animationDelay = `${Math.random() * 10}s`;  // ← Исправлено
-        drop.style.animationDuration = `${0.5 + Math.random() * 1}s`;  // ← Исправлено
-        rainContainer.appendChild(drop);
+        fragment.appendChild(createSingleDrop(true));
     }
     
-    // Интервал для добавления новых капель (сохраняем ID для очистки)
+    // Вставляем все капли ОДНОЙ операцией, вызывая только один reflow
+    rainContainer.appendChild(fragment);
+    
+    // Интервал для добавления новых капель
     rainInterval = setInterval(() => {
-         //Проверяем, существует ли ещё контейнер
-        if (!rainContainer || !rainContainer.parentNode) {
+        // Проверяем, существует ли еще контейнер в DOM
+        if (!rainContainer.isConnected) {
             if (rainInterval) {
                 clearInterval(rainInterval);
                 rainInterval = null;
@@ -47,43 +92,34 @@ function createRain() {
             return;
         }
         
-         //Ограничиваем количество капель (удаляем самые старые)
-        while (rainContainer.children.length > 250) {
-            const oldest = rainContainer.children[0];
+        // Ограничиваем количество капель.
+        // Эта проверка все еще нужна как страховка, но будет срабатывать реже,
+        // так как капли удаляются сами по 'animationend'.
+        while (rainContainer.children.length > CONFIG.maxDrops) {
+            const oldest = rainContainer.firstElementChild;
             if (oldest) oldest.remove();
         }
         
-        // Добавляем новую каплю
-        const newDrop = document.createElement('div');
-        newDrop.classList.add('drop');
-        const sizeClass = dropSizes[Math.floor(Math.random() * dropSizes.length)];
-        newDrop.classList.add(sizeClass);
-        newDrop.style.left = `${Math.random() * 100}%`;  // ← Исправлено
-        newDrop.style.animationDelay = '0s';
-        newDrop.style.animationDuration = `${0.5 + Math.random() * 1}s`;  // ← Исправлено
+        // Добавляем новую каплю без начальной задержки
+        const newDrop = createSingleDrop(false);
         rainContainer.appendChild(newDrop);
-    }, 150);
+    }, CONFIG.creationInterval);
     
-    console.log(` Создано ${numberOfDrops} капель`);
+    console.log(`Создано ${numberOfDrops} начальных капель`);
 }
 
-// Очистка при уходе со страницы
 function stopRain() {
     if (rainInterval) {
-       clearInterval(rainInterval);
+        clearInterval(rainInterval);
         rainInterval = null;
-        console.log(' Дождь остановлен');
+        console.log('Дождь остановлен');
     }
     const rainContainer = document.getElementById('rain');
-    if (rainContainer) {
-        rainContainer.innerHTML = '';
-    }
+    clearRainContainer(rainContainer);
 }
 
-// Запускаем дождь
+// Запуск
 createRain();
-
- //Останавливаем дождь при уходе со страницы
 window.addEventListener('beforeunload', stopRain);
     // Дождь через tsparticles
 //tsParticles.load({
